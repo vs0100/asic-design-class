@@ -54,3 +54,63 @@ STEPS:
 INITIAL AND FINAL OUTPUT
 ![Screenshot from 2024-07-17 08-11-55](https://github.com/user-attachments/assets/60c5e1ee-1179-4bec-8dd8-0b661dbd5b32)
 
+
+Lab2
+In Lab1 we compiled and executed our C code on gcc compiler, also in the second task we compiled our code on riscv compiler.
+In this lab we will compile, execute and debug C code using riscv Simulator in Spike Simulation environment
+
+Steps:
+1.We executed our code using gcc compiler and spike simulator to check if both have the same result.
+  To compile code in Spike Simultor we use the following command:
+  
+  riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c 
+  
+  To run code in Spike Simulator we use the following command:
+  
+  spike pk sum1ton.o
+  
+  Now we compared our gcc output and riscv output wich came out same.
+  
+  
+
+2. We tried to debug our code using spike by using the following command:
+   spike -d pk sum1ton.o
+   Complete assembly code is shown into the terminal
+
+
+3.We want debug only the main part of the code manually so all the part which was before that we executed using the command
+    until pc 0 100b0
+
+
+
+
+
+4.After this we wanted to run each step manually and noting down the values which are changing in each registers.
+  First, we checked the values of register a2 by using the command
+    reg 0 a2
+  Initially it had 0x00000000000000b0
+  After this we executed one line of code by pressing Enter so that the next line gets executed.
+  The next was lui a2 0x1 which load the upper immediate that is the the bits from 12 to 31 with value 1 i.e, 0x00000000000100b0
+  Again we checked the value of the register which now contained the changed value.
+
+
+
+5. After this in the next instruction we loaded register a0 with value 0x21 and checked it.
+
+6. The next instruction decremented the value present in the stack pointer by 16.
+  Initially it had
+  After the execution of instruction it had 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
