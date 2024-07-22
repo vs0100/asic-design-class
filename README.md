@@ -69,15 +69,15 @@ In this lab we will compile, execute and debug C code using riscv Simulator in S
 1.We executed our code using gcc compiler and spike simulator to check if both have the same result.
   To compile code in Spike Simultor we use the following command:
   
-  
+  ```bash
   riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c 
-  
+  ```
   
   To run code in Spike Simulator we use the following command:
   
-  
-  spike pk sum1ton.o
-  
+ ```bash 
+ spike pk sum1ton.o
+  ```
   
   Now we compared our gcc output and riscv output wich came out same.
   
@@ -85,9 +85,9 @@ In this lab we will compile, execute and debug C code using riscv Simulator in S
 
 2.We tried to debug our code using spike by using the following command:
 
-   
-   spike -d pk sum1ton.o
-   
+```bash   
+spike -d pk sum1ton.o
+ ```  
    
    Complete assembly code is shown into the terminal
    
@@ -95,16 +95,19 @@ In this lab we will compile, execute and debug C code using riscv Simulator in S
 
 
 3.We want debug only the main part of the code manually so all the part which was before that we executed using the command
-    until pc 0 100b0
+```bash
+ until pc 0 100b0
+```
 
   ![Screenshot from 2024-07-22 18-26-25](https://github.com/user-attachments/assets/99f7e1c1-9008-4726-98fa-544d167cbc03)
   
 
 4.After this we wanted to run each step manually and noting down the values which are changing in each registers.
   First, we checked the values of register a2 by using the command
-  
+  ```bash
     reg 0 a2
-    
+  ```
+  
   Initially it had 0x00000000000000b0
   After this we executed one line of code by pressing Enter so that the next line gets executed.
   The next was lui a2 0x1 which load the upper immediate that is the the bits from 12 to 31 with value 1 i.e, 0x00000000000100b0
