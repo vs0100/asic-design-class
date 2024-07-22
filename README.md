@@ -55,61 +55,76 @@ INITIAL AND FINAL OUTPUT
 ![Screenshot from 2024-07-17 08-11-55](https://github.com/user-attachments/assets/60c5e1ee-1179-4bec-8dd8-0b661dbd5b32)
 
 
-Lab2
+
+
+# LAB2
+
+
 In Lab1 we compiled and executed our C code on gcc compiler, also in the second task we compiled our code on riscv compiler.
 In this lab we will compile, execute and debug C code using riscv Simulator in Spike Simulation environment
 
-Steps:
+## STEPS:
+
+
 1.We executed our code using gcc compiler and spike simulator to check if both have the same result.
   To compile code in Spike Simultor we use the following command:
   
+  
   riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c 
+  
   
   To run code in Spike Simulator we use the following command:
   
+  
   spike pk sum1ton.o
+  
   
   Now we compared our gcc output and riscv output wich came out same.
   
-  
+  ![Screenshot from 2024-07-22 18-23-05](https://github.com/user-attachments/assets/a08930f4-1a75-44ac-bba4-e6cdda465dbd)
 
-2. We tried to debug our code using spike by using the following command:
+2.We tried to debug our code using spike by using the following command:
+
+   
    spike -d pk sum1ton.o
+   
+   
    Complete assembly code is shown into the terminal
+   
+  ![Screenshot from 2024-07-22 18-25-16](https://github.com/user-attachments/assets/b7d1e1a6-9168-40d7-bc47-4885d6780c14)
 
 
 3.We want debug only the main part of the code manually so all the part which was before that we executed using the command
     until pc 0 100b0
 
-
-
-
+  ![Screenshot from 2024-07-22 18-26-25](https://github.com/user-attachments/assets/99f7e1c1-9008-4726-98fa-544d167cbc03)
+  
 
 4.After this we wanted to run each step manually and noting down the values which are changing in each registers.
   First, we checked the values of register a2 by using the command
+  
     reg 0 a2
+    
   Initially it had 0x00000000000000b0
   After this we executed one line of code by pressing Enter so that the next line gets executed.
   The next was lui a2 0x1 which load the upper immediate that is the the bits from 12 to 31 with value 1 i.e, 0x00000000000100b0
   Again we checked the value of the register which now contained the changed value.
+  
+  ![Screenshot from 2024-07-22 18-27-34](https://github.com/user-attachments/assets/172905d9-82e6-4cf6-9db7-b71a060c78e8)
+
+5.After this in the next instruction we loaded register a0 with value 0x21 and checked it.
+
+ ![Screenshot from 2024-07-22 18-28-29](https://github.com/user-attachments/assets/31f2fb08-e19e-4642-87c2-1e88f6ada302)
 
 
+6.The next instruction decremented the value present in the stack pointer by 16(in decimal) which is 10 in binary.
+  Initially it had 0x0000003ffffffb50
 
-5. After this in the next instruction we loaded register a0 with value 0x21 and checked it.
+After the execution of instruction it had 0x0000003ffffffb40
 
-6. The next instruction decremented the value present in the stack pointer by 16.
-  Initially it had
-  After the execution of instruction it had 
-    
+![Screenshot from 2024-07-22 18-33-49](https://github.com/user-attachments/assets/8261d937-119d-425e-a719-263faf653f87)
 
-
-
-
-
-
-
-
-
+We can do the same for other instructions as well.
 
 
 
