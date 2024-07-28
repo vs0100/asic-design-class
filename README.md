@@ -134,16 +134,16 @@ We can do the same for other instructions as well.
 
 # **LAB 3**
 
-#To identify the type of instructions in RISCv as R, I, S, B, U, J type, understand the differences between manually coding 32 bit pattern of instructions and when the instructions are executed using RISCv ISA.
+## To identify the type of instructions in RISCv as R, I, S, B, U, J type, understand the differences between manually coding 32 bit pattern of instructions and when the instructions are executed using RISCv ISA.  
 
-Different type of instructions in RISCv:
+Different type of instructions in RISCv:  
 
-Instructins are classified in RISCv based on their formats and functionality:
+Instructins are classified in RISCv based on their formats and functionality:  
 
- ##1. R- Type(Register):
-     Used for arithmetic and logical operations where all operands are registers.
-     Example: ADD, SUB, AND, OR, XOR, SLL, SRL, SLT.
-     Format:
+ ##1. R- Type(Register):  
+     Used for arithmetic and logical operations where all operands are registers.  
+     Example: ADD, SUB, AND, OR, XOR, SLL, SRL, SLT.  
+     Format:  
    
 
 
@@ -180,10 +180,10 @@ Instructins are classified in RISCv based on their formats and functionality:
 
 
 
-   ##2.I type(Immediate):
-      Used for operations involving an immediate value.
-      Example: ADDI, SLTI, ANDI, ORI, XORI, LW.
-      Format:
+## 2.I type(Immediate):  
+  Used for operations involving an immediate value.  
+  Example: ADDI, SLTI, ANDI, ORI, XORI, LW.  
+  Format:
      
 
 
@@ -212,9 +212,10 @@ Instructins are classified in RISCv based on their formats and functionality:
      Location: 20 to 31 of the instruction 
      Description: Represents a 12-bit immediate value used in the operation.
 
-##3.S-Type():
-     Used for storing instructions where data from a register is stored into memory. 
-     Format:
+
+## 3.S-Type():
+   Used for storing instructions where data from a register is stored into memory. 
+   Format:
      
 
      opcode
@@ -248,9 +249,9 @@ Instructins are classified in RISCv based on their formats and functionality:
      Desription: Represents the upper 7 bits of the immediate value for address calculation.
      
 
-   #4.B-Type()
-      The B-type format in the RISC-V instruction set architecture (ISA) is used for conditional branch                       instructions. These instructions perform a comparison between two registers and branch to a specified                   instruction if the condition is met.
-      Format:
+## 4.B-Type()
+   The B-type format in the RISC-V instruction set architecture (ISA) is used for conditional branch                       instructions. These instructions perform a comparison between two registers and branch to a specified                   instruction if the condition is met.
+   Format:
      
 
       opcode:
@@ -293,8 +294,8 @@ Instructins are classified in RISCv based on their formats and functionality:
       Location: Bit 31
       Description: Represents the 12th bit of the immediate value used for address calculation.
       
-  ##5.U-Type
-      The U-type format is used for instructions that need a 20-bit immediate value. These instructions include               LUI (Load Upper Immediate) and AUIPC (Add Upper Immediate to PC).
+## 5.U-Type
+  The U-type format is used for instructions that need a 20-bit immediate value. These instructions include               LUI (Load Upper Immediate) and AUIPC (Add Upper Immediate to PC).
      
       opcode:
       Size: 7 bits
@@ -327,9 +328,9 @@ Instructins are classified in RISCv based on their formats and functionality:
       Description: Represents bit 20 of the immediate value used for the jump target address.
 
 
-  ##6.J-type
-      The J-type format is primarily used for jump instructions, such as JAL (Jump and Link).
-      Format:
+## 6.J-type
+   The J-type format is primarily used for jump instructions, such as JAL (Jump and Link).
+   Format:
     
       opcode:  
       Size: 7 bits
