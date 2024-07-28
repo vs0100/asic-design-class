@@ -132,8 +132,7 @@ We can do the same for other instructions as well.
 
 
 
-
-#LAB 3
+#**LAB 3**
 
 #To identify the type of instructions in RISCv as R, I, S, B, U, J type, understand the differences between manually coding 32 bit pattern of instructions and when the instructions are executed using RISCv ISA.
 
@@ -145,7 +144,7 @@ Instructins are classified in RISCv based on their formats and functionality:
      Used for arithmetic and logical operations where all operands are registers.
      Example: ADD, SUB, AND, OR, XOR, SLL, SRL, SLT.
      Format:
-   ![Screenshot from 2024-07-28 08-54-04](https://github.com/user-attachments/assets/262d1245-ad41-44d7-b85c-cdd3f40c7b98)
+   
 
 
      func7
@@ -185,7 +184,7 @@ Instructins are classified in RISCv based on their formats and functionality:
       Used for operations involving an immediate value.
       Example: ADDI, SLTI, ANDI, ORI, XORI, LW.
       Format:
-     ![Screenshot from 2024-07-28 08-53-50](https://github.com/user-attachments/assets/11983562-e795-4fe8-ba6b-6cd14fabdbfe)
+     
 
 
      opcode
@@ -216,7 +215,7 @@ Instructins are classified in RISCv based on their formats and functionality:
 ##3.S-Type():
      Used for storing instructions where data from a register is stored into memory. 
      Format:
-     ![Screenshot from 2024-07-28 09-44-29](https://github.com/user-attachments/assets/3a2bd735-3b34-4ada-8e60-cedbaccbfd0a)
+     
 
      opcode
      Size: 7 bits
@@ -252,7 +251,7 @@ Instructins are classified in RISCv based on their formats and functionality:
    #4.B-Type()
       The B-type format in the RISC-V instruction set architecture (ISA) is used for conditional branch                       instructions. These instructions perform a comparison between two registers and branch to a specified                   instruction if the condition is met.
       Format:
-      ![Screenshot from 2024-07-28 10-13-21](https://github.com/user-attachments/assets/0ce738a9-5516-4c8f-a0c8-17cd628aa883)
+     
 
       opcode:
       Size: 7 bits
@@ -331,8 +330,7 @@ Instructins are classified in RISCv based on their formats and functionality:
   ##6.J-type
       The J-type format is primarily used for jump instructions, such as JAL (Jump and Link).
       Format:
-      ![Jformat](https://github.com/user-attachments/assets/bae751ac-94ab-4fca-a4ba-04f1aa60fde4)
-
+    
       opcode:  
       Size: 7 bits
       Location: Bits 0 to 6 of the instruction
