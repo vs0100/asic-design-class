@@ -134,20 +134,20 @@ We can do the same for other instructions as well.
 
 # **LAB 3**
 
-## To identify the type of instructions in RISC-V as R, I, S, B, U, J type, understand the differences between manually coding 32-bit pattern of instructions and when the instructions are executed using RISC-V ISA.  
+## To identify the type of instructions in RISC-V as R, I, S, B, U, J type, understand the differences between manually coding 32-bit pattern of instructions and when the instructions are executed using RISC-V ISA.
 
-### Different Types of Instructions in RISC-V:
+### Different Types of Instructions in RISC-V
 
-Instructions are classified in RISC-V based on their formats and functionality:  
+Instructions are classified in RISC-V based on their formats and functionality:
 
 #### 1. R-Type (Register)
 Used for arithmetic and logical operations where all operands are registers.  
 Example: ADD, SUB, AND, OR, XOR, SLL, SRL, SLT.  
-Format:  
+Format:
 
 - **func7**  
   - Size: 7 bits  
-  - Location: Bits 25 to 31 of the instruction   
+  - Location: Bits 25 to 31 of the instruction  
   - Description: Differentiates between instructions within the same opcode and funct3.  
 
 - **rs2 (Source Register 2)**  
@@ -157,7 +157,7 @@ Format:
 
 - **rs1 (Source Register 1)**  
   - Size: 5 bits  
-  - Location: Bits 15 to 19 of the instruction   
+  - Location: Bits 15 to 19 of the instruction  
   - Description: Specifies the first source register.  
 
 - **funct3**  
@@ -167,7 +167,7 @@ Format:
 
 - **rd (Destination Register)**  
   - Size: 5 bits  
-  - Location: Bits 7 to 11 of the instruction   
+  - Location: Bits 7 to 11 of the instruction  
   - Description: Specifies the destination register.  
 
 - **opcode**  
@@ -175,9 +175,9 @@ Format:
   - Location: Bits 0 to 6 of the instruction  
   - Description: Specifies the general operation category (e.g., arithmetic, logical, load, store, etc.).  
 
-#### 2. I-Type (Immediate)    
+#### 2. I-Type (Immediate)  
 Used for operations involving an immediate value.  
-Example: ADDI, SLTI, ANDI, ORI, XORI, LW.    
+Example: ADDI, SLTI, ANDI, ORI, XORI, LW.  
 Format:
 
 - **opcode**  
@@ -192,12 +192,12 @@ Format:
 
 - **funct3**  
   - Size: 3 bits  
-  - Location: Bits 12 to 14 of the instruction   
+  - Location: Bits 12 to 14 of the instruction  
   - Description: Provides mid-level differentiation within the opcode category.  
 
 - **rs1 (Source Register 1)**  
   - Size: 5 bits  
-  - Location: Bits 15 to 19 of the instruction   
+  - Location: Bits 15 to 19 of the instruction  
   - Description: Specifies the first source register.  
 
 - **imm (Immediate Value)**  
@@ -209,15 +209,15 @@ Format:
 Used for storing instructions where data from a register is stored into memory.  
 Format:
 
-- **opcode**    
-  - Size: 7 bits   
-  - Location: Bits 0 to 6 of the instruction     
-  - Description: Identifies the type of operation (e.g., store).    
+- **opcode**  
+  - Size: 7 bits  
+  - Location: Bits 0 to 6 of the instruction  
+  - Description: Identifies the type of operation (e.g., store).  
 
-- **imm (Immediate Value, lower 5 bits)**    
-  - Size: 5 bits   
-  - Location: Bits 7 to 11 of the instruction    
-  - Description: Represents the lower 5 bits of the immediate value for address calculation.   
+- **imm (Immediate Value, lower 5 bits)**  
+  - Size: 5 bits  
+  - Location: Bits 7 to 11 of the instruction  
+  - Description: Represents the lower 5 bits of the immediate value for address calculation.  
 
 - **funct3**  
   - Size: 3 bits  
@@ -239,7 +239,7 @@ Format:
   - Location: Bits 25 to 31 of the instruction  
   - Description: Represents the upper 7 bits of the immediate value for address calculation.  
 
-#### 4. B-Type
+#### 4. B-Type  
 Used for conditional branch instructions.  
 Format:
 
@@ -283,224 +283,226 @@ Format:
   - Location: Bit 31  
   - Description: Represents the 12th bit of the immediate value.  
 
-## 5. U-Type
+#### 5. U-Type  
 The U-type format is used for instructions that need a 20-bit immediate value. These instructions include LUI (Load Upper Immediate) and AUIPC (Add Upper Immediate to PC).
 
-- **opcode**:
-  - Size: 7 bits
-  - Location: Bits 0 to 6 of the instruction
+- **opcode**  
+  - Size: 7 bits  
+  - Location: Bits 0 to 6 of the instruction  
   - Description: Specifies the general operation category.
 
-- **rd**:
-  - Size: 5 bits
-  - Location: Bits 7 to 11 of the instruction
+- **rd**  
+  - Size: 5 bits  
+  - Location: Bits 7 to 11 of the instruction  
   - Description: Specifies the destination register.
 
-- **imm[19:12]**:
-  - Size: 8 bits
-  - Location: Bits 12 to 19 of the instruction
+- **imm[19:12]**  
+  - Size: 8 bits  
+  - Location: Bits 12 to 19 of the instruction  
   - Description: Represents bits 19 to 12 of the immediate value.
 
-- **imm[11]**:
-  - Size: 1 bit
-  - Location: Bit 20
+- **imm[11]**  
+  - Size: 1 bit  
+  - Location: Bit 20  
   - Description: Represents bit 11 of the immediate value.
 
-- **imm[10:1]**:
-  - Size: 10 bits
-  - Location: Bits 21 to 30 of the instruction
+- **imm[10:1]**  
+  - Size: 10 bits  
+  - Location: Bits 21 to 30 of the instruction  
   - Description: Represents bits 10 to 1 of the immediate value.
 
-- **imm[20]**:
-  - Size: 1 bit
-  - Location: Bit 31
+- **imm[20]**  
+  - Size: 1 bit  
+  - Location: Bit 31  
   - Description: Represents bit 20 of the immediate value.
 
-## 6. J-Type
+#### 6. J-Type  
 The J-type format is primarily used for jump instructions, such as JAL (Jump and Link).
 
-- **opcode**:
-  - Size: 7 bits
-  - Location: Bits 0 to 6 of the instruction
+- **opcode**  
+  - Size: 7 bits  
+  - Location: Bits 0 to 6 of the instruction  
   - Description: Specifies the operation. For JAL, the opcode is 1101111.
 
-- **rd**:
-  - Size: 5 bits
-  - Location: Bits 7 to 11 of the instruction
+- **rd**  
+  - Size: 5 bits  
+  - Location: Bits 7 to 11 of the instruction  
   - Description: Specifies the destination register where the return address (PC + 4) will be stored.
 
-- **imm[19:12]**:
-  - Size: 8 bits
-  - Location: Bits 12 to 19 of the instruction
+- **imm[19:12]**  
+  - Size: 8 bits  
+  - Location: Bits 12 to 19 of the instruction  
   - Description: Represents bits 19 to 12 of the immediate value.
 
-- **imm[11]**:
-  - Size: 1 bit
-  - Location: Bit 20
+- **imm[11]**  
+  - Size: 1 bit  
+  - Location: Bit 20  
   - Description: Represents bit 11 of the immediate value.
 
-- **imm[10:1]**:
-  - Size: 10 bits
-  - Location: Bits 21 to 30 of the instruction
+- **imm[10:1]**  
+  - Size: 10 bits  
+  - Location: Bits 21 to 30 of the instruction  
   - Description: Represents bits 10 to 1 of the immediate value.
 
-- **imm[20]**:
-  - Size: 1 bit
-  - Location: Bit 31
+- **imm[20]**  
+  - Size: 1 bit  
+  - Location: Bit 31  
   - Description: Represents bit 20 of the immediate value.
 
-### Examples of Instructions with RISC-V ISA Representations:
+  ADD r8, r9, r10  
+  #R-Type Instruction Format  
+  func7 - 0000000  
+  rs2 - 01010  
+  rs1 - 01001  
+  func3 - 000  
+  rd - 01000  
+  opcode - 0110011  
+  
+  `0000000 01010 01001 000 01000 0110011`
 
-#### ADD r8, r9, r10 (R-Type)
-- **func7**: 0000000
-- **rs2**: 01010
-- **rs1**: 01001
-- **func3**: 000
-- **rd**: 01000
-- **opcode**: 0110011
+  SUB r10, r8, r9  
+  #R-Type Instruction Format  
+  func7 - 0100000  
+  rs2 - 01001  
+  rs1 - 01000  
+  func3 - 000  
+  rd - 01010  
+  opcode - 0110011  
+  
+  `0100000 01001 01000 000 01010 0110011`
 
-Instruction: `0000000 01010 01001 000 01000 0110011`
+  AND r9, r8, r10  
+  #R-Type Instruction Format  
+  func7 - 0000000  
+  rs2 - 01010  
+  rs1 - 01000  
+  func3 - 111  
+  rd - 01001  
+  opcode - 0110011  
+  
+  `0000000 01010 01000 111 01001 0110011`
 
-#### SUB r10, r8, r9 (R-Type)
-- **func7**: 0100000
-- **rs2**: 01001
-- **rs1**: 01000
-- **func3**: 000
-- **rd**: 01010
-- **opcode**: 0110011
+  OR r8, r9, r5  
+  #R-Type Instruction Format  
+  func7 - 0000000  
+  rs2 - 00101  
+  rs1 - 01001  
+  func3 - 110  
+  rd - 01000  
+  opcode - 0110011  
+  
+  `0000000 00101 01001 110 01000 0110011`
 
-Instruction: `0100000 01001 01000 000 01010 0110011`
+  XOR r8, r8, r4  
+  #R-Type Instruction Format  
+  funct7: 0000000  
+  rs2: 00100  
+  rs1: 01000  
+  funct3: 100  
+  rd: 01000  
+  opcode: 0110011  
+  
+  `0000000 00100 01000 100 01000 0110011`
 
-#### AND r9, r8, r10 (R-Type)
-- **func7**: 0000000
-- **rs2**: 01010
-- **rs1**: 01000
-- **func3**: 111
-- **rd**: 01001
-- **opcode**: 0110011
+  SLT r0, r1, r4  
+  #R-Type Instruction Format  
+  funct7: 0000000  
+  rs2: 00100  
+  rs1: 00001  
+  funct3: 010  
+  rd: 00000  
+  opcode: 0110011  
+  
+  `0000000  00100 00001 010 00000 0110011`
 
-Instruction: `0000000 01010 01000 111 01001 0110011`
+  ADDI r02, r2, 5  
+  #I-Type Instruction Format  
+  immediate: 000000000101  
+  rs1: 00010  
+  funct3: 000  
+  rd: 00010  
+  opcode: 0010011  
+  
+  `000000000101 00010 000 00010 0010011`
 
-#### OR r8, r9, r5 (R-Type)
-- **func7**: 0000000
-- **rs2**: 00101
-- **rs1**: 01001
-- **func3**: 110
-- **rd**: 01000
-- **opcode**: 0110011
+  SW r2, r0, 4  
+  #S-Type Instruction Format  
+  immediate: 0000000 00010  
+  rs2: 00010  
+  rs1: 00000  
+  funct3: 010  
+  opcode: 0100011  
+  
+  `0000000 00010 00000 010 00100 0100011`
 
-Instruction: `0000000 00101 01001 110 01000 0110011`
+  SRL r06, r01, r1  
+  #R-Type Instruction Format  
+  funct7: 0000000  
+  rs2: 00001  
+  rs1: 00001  
+  funct3: 101  
+  rd: 00110  
+  opcode: 0110011  
+  
+  `0000000 00001 00001 101 00110 0110011`
 
-#### XOR r8, r8, r4 (R-Type)
-- **funct7**: 0000000
-- **rs2**: 00100
-- **rs1**: 01000
-- **funct3**: 100
-- **rd**: 01000
-- **opcode**: 0110011
+  BNE r0, r0, 20  
+  #B-Type Instruction Format  
+  immediate: 000000 01000 0  
+  rs2: 00000  
+  rs1: 00000  
+  funct3: 001  
+  opcode: 1100011  
+  
+  `0000000 00000 00000 001 01000 1100011`
 
-Instruction: `0000000 00100 01000 100 01000 0110011`
+  BEQ r0, r0, 15  
+  #B-Type Instruction Format  
+  immediate: 000000 01111 0  
+  rs1: 00000  
+  rs2: 00000  
+  funct3: 000  
+  opcode: 1100011  
+  
+  `0000000 00000 00000 000 01111 1100011`
 
-#### SLT r0, r1, r4 (R-Type)
-- **funct7**: 0000000
-- **rs2**: 00100
-- **rs1**: 00001
-- **funct3**: 010
-- **rd**: 00000
-- **opcode**: 0110011
+  LW r03, r01, 2  
+  #I-type instruction format:  
+  immediate: 000000000010  
+  rs1: 00001  
+  funct3: 010  
+  rd: 00011  
+  opcode: 0000011  
+  
+  `000000000010 00001 010 00011 0000011`
 
-Instruction: `0000000 00100 00001 010 00000 0110011`
+  SLL r05, r01, r1  
+  #R-Type instruction format:  
+  funct7: 0000000  
+  rs2: 00001  
+  rs1: 00001  
+  funct3: 001  
+  rd: 00101  
+  opcode: 0110011  
+  
+  `0000000 00001 00001 001 00101 0110011`
 
-#### ADDI r02, r2, 5 (I-Type)
-- **immediate**: 000000000101
-- **rs1**: 00010
-- **funct3**: 000
-- **rd**: 00010
-- **opcode**: 0010011
-
-Instruction: `000000000101 00010 000 00010 0010011`
-
-#### SW r2, r0, 4 (S-Type)
-- **immediate**: 0000000 00010
-- **rs2**: 00010
-- **rs1**: 00000
-- **funct3**: 010
-- **opcode**: 0100011
-
-Instruction: `0000000 00010 00000 010 00100 0100011`
-
-#### SRL r06, r01, r1 (R-Type)
-- **funct7**: 0000000
-- **rs2**: 00001
-- **rs1**: 00001
-- **funct3**: 101
-- **rd**: 00110
-- **opcode**: 0110011
-
-Instruction: `0000000 00001 00001 101 00110 0110011`
-
-#### BNE r0, r0, 20 (B-Type)
-- **immediate**: 000000 01000 0
-- **rs2**: 00000
-- **rs1**: 00000
-- **funct3**: 001
-- **opcode**: 1100011
-
-Instruction: `0000000 00000 00000 001 01000 1100011`
-
-#### BEQ r0, r0, 15 (B-Type)
-- **immediate**: 000000 01111 0
-- **rs1**: 00000
-- **rs2**: 00000
-- **funct3**: 000
-- **opcode**: 1100011
-
-Instruction: `0000000 00000 00000 000 01111 1100011`
-
-#### LW r03, r01, 2 (I-Type)
-- **immediate**: 000000000010
-- **rs1**: 00001
-- **funct3**: 010
-- **rd**: 00011
-- **opcode**: 0000011
-
-Instruction: `000000000010 00001 010 00011 0000011`
-
-#### SLL r05, r01, r1 (R-Type)
-- **funct7**: 0000000
-- **rs2**: 00001
-- **rs1**: 00001
-- **funct3**: 001
-- **rd**: 00101
-- **opcode**: 0110011
-
-Instruction: `0000000 00001 00001 001 00101 0110011`
-
-| Assembly Code        | Hardcoded Hex Value | 32-bit RISC-V Instruction (Hex) |
-|----------------------|---------------------|---------------------------------|
-| add r6, r1, r2       | 32'h02208300        | 0x00208333                      |
-| sub r7, r1, r2       | 32'h02209380        | 0x402083b3                      |
-| and r8, r1, r3       | 32'h0230a400        | 0x0030a333                      |
-| or r9, r2, r5        | 32'h02513480        | 0x005123b3                      |
-| xor r10, r1, r4      | 32'h0240c500        | 0x0040a333                      |
-| slt r11, r2, r4      | 32'h02415580        | 0x004123b3                      |
-| addi r12, r4, 5      | 32'h00520600        | 0x00520613                      |
-| sw r3, r1, 2         | 32'h00209181        | 0x00212023                      |
-| lw r13, r1, 2        | 32'h00208681        | 0x00208683                      |
-| beq r0, r0, 15       | 32'h00f00002        | 0x00f00063                      |
-| add r14, r2, r2      | 32'h00210700        | 0x002103b3                      |
-| bne r0, r1, 20       | 32'h01409002        | 0x01409063                      |
-| sll r15, r1, r2(2)   | 32'h00208783        | 0x002087b3                      |
-| srl r16, r14, r2(2)  | 32'h00271803        | 0x002718b3                      |
-
-   
-
-
-
-
-
-
-
+  | Assembly Code        | Hardcoded Hex Value | 32-bit RISC-V Instruction (Hex) |
+  |----------------------|---------------------|---------------------------------|
+  | add r6, r1, r2       | 32'h02208300        | 0x00208333                      |
+  | sub r7, r1, r2       | 32'h02209380        | 0x402083b3                      |
+  | and r8, r1, r3       | 32'h0230a400        | 0x0030a333                      |
+  | or r9, r2, r5        | 32'h02513480        | 0x005123b3                      |
+  | xor r10, r1, r4      | 32'h0240c500        | 0x0040a333                      |
+  | slt r11, r2, r4      | 32'h02415580        | 0x004123b3                      |
+  | addi r12, r4, 5      | 32'h00520600        | 0x00520613                      |
+  | sw r3, r1, 2         | 32'h00209181        | 0x00212023                      |
+  | lw r13, r1, 2        | 32'h00208681        | 0x00208683                      |
+  | beq r0, r0, 15       | 32'h00f00002        | 0x00f00063                      |
+  | add r14, r2, r2      | 32'h00210700        | 0x002103b3                      |
+  | bne r0, r1, 20       | 32'h01409002        | 0x01409063                      |
+  | sll r15, r1, r2(2)   | 32'h00208783        | 0x002087b3                      |
+  | srl r16, r14, r2(2)  | 32'h00271803        | 0x002718b3                      |
 
 
 
