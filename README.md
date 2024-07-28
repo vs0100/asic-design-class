@@ -513,7 +513,7 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
 
 
 
-
+ ### Verilog Hardcoded values and RISCv ISA 
 
 
   
