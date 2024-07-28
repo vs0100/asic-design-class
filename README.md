@@ -363,20 +363,20 @@ Instructins are classified in RISCv based on their formats and functionality:
       Description: Represents bit 20 of the immediate value used for the jump target address.
 
 
-  Below is the list of instructions which we have to classify
-       ADD r8, r9, r10
-       SUB r10, r8, r9
-       AND r9, r8, r10
-       OR r8, r9, r5
-       XOR r8, r8, r4
-       SLT r00, r1, r4
-       ADDI r02, r2, 5
-       SW r2, r0, 4
-       SRL r06, r01, r1
-       BNE r0, r0, 20
-       BEQ r0, r0, 15
-       LW r03, r01, 2
-       SLL r05, r01, r1  
+  Below is the list of instructions which we have to classify  
+       ADD r8, r9, r10  
+       SUB r10, r8, r9  
+       AND r9, r8, r10  
+       OR r8, r9, r5  
+       XOR r8, r8, r4  
+       SLT r00, r1, r4  
+       ADDI r02, r2, 5  
+       SW r2, r0, 4  
+       SRL r06, r01, r1  
+       BNE r0, r0, 20  
+       BEQ r0, r0, 15  
+       LW r03, r01, 2  
+       SLL r05, r01, r1    
 
   ADD r8, r9, r10  
   #R-Type Instruction Format     
