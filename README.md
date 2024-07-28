@@ -333,7 +333,7 @@ Instructins are classified in RISCv based on their formats and functionality:
       Format:
       ![Jformat](https://github.com/user-attachments/assets/bae751ac-94ab-4fca-a4ba-04f1aa60fde4)
 
-      opcode:
+      opcode:  
       Size: 7 bits
       Location: Bits 0 to 6 of the instruction
       Description: Specifies the operation. For JAL, the opcode is 1101111.
@@ -377,7 +377,7 @@ Instructins are classified in RISCv based on their formats and functionality:
        BNE r0, r0, 20
        BEQ r0, r0, 15
        LW r03, r01, 2
-       SLL r05, r01, r1
+       SLL r05, r01, r1  
 
   ADD r8, r9, r10  
   #R-Type Instruction Format     
@@ -390,146 +390,146 @@ Instructins are classified in RISCv based on their formats and functionality:
   ```
   0000000 01010 01001 000 01000 0110011
   ```
-  SUB r10, r8, r9 :
-  #R-Type Instruction Format  
-  func7 - 0100000
-  rs2 - 01001
-  rs1 - 01000
-  func3 - 000
-  rd - 01010
-  opcode - 0110011
+  SUB r10, r8, r9  
+  #R-Type Instruction Format   
+  func7 - 0100000  
+  rs2 - 01001  
+  rs1 - 01000  
+  func3 - 000  
+  rd - 01010  
+  opcode - 0110011  
 
   ```
   0100000 01001 01000 000 01010 0110011
 ```
-  AND r9, r8, r10   
-  #R-Type Instruction Format  
-  func7 - 0000000
-  rs2 - 01010
-  rs1 - 01000
-  func3 - 111
-  rd - 01001
-  opcode - 0110011
+  AND r9, r8, r10    
+  #R-Type Instruction Format    
+  func7 - 0000000  
+  rs2 - 01010  
+  rs1 - 01000  
+  func3 - 111  
+  rd - 01001  
+  opcode - 0110011  
 
   ```
 0000000 01010 01000 111 01001 0110011
 ```
 
-  OR r8, r9, r5
-  #R-Type Instruction Format  
-  func7 - 0000000
-  rs2 - 00101
-  rs1 - 01001
-  func3 - 110
-  rd - 01000
-  opcode - 0110011
+  OR r8, r9, r5  
+  #R-Type Instruction Format    
+  func7 - 0000000  
+  rs2 - 00101  
+  rs1 - 01001  
+  func3 - 110  
+  rd - 01000  
+  opcode - 0110011  
   ```
 0000000 00101 01001 110 01000 0110011
 ```
 
-  XOR r8, r8, r4
-  #R-Type Instruction Format  
-  funct7: 0000000
-  rs2: 00100
-  rs1: 01000
-  funct3: 100
-  rd: 01000
-  opcode: 0110011
+  XOR r8, r8, r4  
+  #R-Type Instruction Format    
+  funct7: 0000000  
+  rs2: 00100  
+  rs1: 01000  
+  funct3: 100  
+  rd: 01000  
+  opcode: 0110011  
 ```
   0000000 00100 01000 100 01000 0110011
 ```
 
-  SLT r0, r1, r4
-  #R-Type Instruction Format  
-  funct7: 0000000
-  rs2: 00100
-  rs1: 00001
-  funct3: 010
-  rd: 00000
-  opcode: 0110011
+  SLT r0, r1, r4  
+  #R-Type Instruction Format   
+  funct7: 0000000  
+  rs2: 00100  
+  rs1: 00001  
+  funct3: 010  
+  rd: 00000  
+  opcode: 0110011  
   ```
     0000000  00100 00001 010 00000 0110011
 ```
 
 
-  ADDI r02, r2, 5
-  #I-Type Instruction Format
-  immediate: 000000000101
-  rs1: 00010
-  funct3: 000
-  rd: 00010
-  opcode: 0010011
+  ADDI r02, r2, 5  
+  #I-Type Instruction Format  
+  immediate: 000000000101  
+  rs1: 00010  
+  funct3: 000  
+  rd: 00010  
+  opcode: 0010011  
   ```
     000000000101 00010 000 00010 0010011
 ```
 
 
-  SW r2, r0, 4
-  #S-Type Instruction Format
-  immediate: 0000000 00010
-  rs2: 00010
-  rs1: 00000
-  funct3 : 010
-  opcode : 0100011
+  SW r2, r0, 4  
+  #S-Type Instruction Format  
+  immediate: 0000000 00010  
+  rs2: 00010  
+  rs1: 00000  
+  funct3 : 010  
+  opcode : 0100011  
   ```
     0000000    00010 00000 010    00100    0100011
    ```
 
-  SRL r06, r01, r1
-  #R-Type Instruction Format
-  funct7: 0000000
-  rs2: 00001
-  rs1: 00001
-  funct3: 101
-  rd: r6 00110
-  opcode: 0110011
+  SRL r06, r01, r1  
+  #R-Type Instruction Format  
+  funct7: 0000000  
+  rs2: 00001  
+  rs1: 00001  
+  funct3: 101  
+  rd: r6 00110  
+  opcode: 0110011  
   ```
     0000000 00001 00001 101 00110 0110011
 ```
 
-  BNE r0, r0, 20
-  #B-Type Instruction Format
-  immediate: 000000 01000 0
-  rs2: 00000
-  rs1 : 00000
-  funct3 : 001
-  opcode : 1100011
+  BNE r0, r0, 20  
+  #B-Type Instruction Format  
+  immediate: 000000 01000 0  
+  rs2: 00000  
+  rs1 : 00000  
+  funct3 : 001  
+  opcode : 1100011  
   ```
     0000000 00000 00000 001 01000 1100011
 ```
 
 
-  BEQ r0, r0, 15
-  #B-Type Instruction Format
-  immediate: 000000 01111 0
-  rs1: 00000
-  rs2: 00000
-  funct3: 000
-  opcode: 1100011
+  BEQ r0, r0, 15  
+  #B-Type Instruction Format  
+  immediate: 000000 01111 0  
+  rs1: 00000  
+  rs2: 00000  
+  funct3: 000  
+  opcode: 1100011  
   ```
   0000000 00000 00000 000 01111 1100011
 ```
 
 
-  LW r03, r01, 2
-  #I-type instruction format:
-  immediate: 000000000010
-  rs1: 00001
-  funct3: 010
-  rd: 00011
-  opcode: 0000011
+  LW r03, r01, 2  
+  #I-type instruction format:  
+  immediate: 000000000010  
+  rs1: 00001  
+  funct3: 010  
+  rd: 00011  
+  opcode: 0000011  
   ```
     000000000010 00001 010 00011 0000011
 ```
 
-  SLL r05, r01, r1
-  #R-Type instruction format:
-  funct7: 0000000
-  rs2: 00001
-  rs1: 00001
-  funct3: 001
-  rd: 00101
-  opcode: 0110011
+  SLL r05, r01, r1  
+  #R-Type instruction format:  
+  funct7: 0000000  
+  rs2: 00001  
+  rs1: 00001  
+  funct3: 001  
+  rd: 00101  
+  opcode: 0110011  
   ```
 0000000 00001 00001 001 00101 0110011
 ```
