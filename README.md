@@ -140,7 +140,7 @@ Different type of instructions in RISCv:
 
 Instructins are classified in RISCv based on their formats and functionality:  
 
- ##1. R- Type(Register):  
+  1. R- Type(Register):  
      Used for arithmetic and logical operations where all operands are registers.  
      Example: ADD, SUB, AND, OR, XOR, SLL, SRL, SLT.  
      Format:  
@@ -150,22 +150,22 @@ Instructins are classified in RISCv based on their formats and functionality:
      func7
      Size: 7 bits
      Location: Bits 25 to 31 of the instruction 
-     Description : It is used to differntiate between instructions.It provides additional information to specify the         exact operation to be performed by the instruction and differentiate between similar instructins that share the         same 'opcode' and 'funct3'. Primarilly used in R type instructions but can also appear in other types for specific      instructions.
+     Description : It is used to differntiate between instructions.It provides additional information to specify the exact operation to be performed by the instruction and differentiate between similar instructins that share the same              'opcode' and 'funct3'. Primarilly used in R type instructions but can also appear in other types for specific instructions.
 
      rs2(Source register 2)
      Size: 5 bits
      Location: Bits 20 to 24 of the instruction 
-     Description : It specifies the second source register in the instruction. Used to indicate the register which is        used to store the second operand for operation. Present in instruction types like R, S and B type.
+     Description : It specifies the second source register in the instruction. Used to indicate the register which is used to store the second operand for operation. Present in instruction types like R, S and B type.
 
      rs1(source register 1)
      Size: 5 bits
      Location: Bits 15 to 19 of the instruction 
-     Description : It specifies the first source register in the instruction which indicates the ,first operand f            for operation. Present in instruction types like R, S and B type.
+     Description : It specifies the first source register in the instruction which indicates the ,first operand for operation. Present in instruction types like R, S and B type.
 
      funct3
      Size: 3 bits
      Location: Bits 12 to 14 of the instruction 
-     Description : It provides the mid level differentiation of operarions wwithin the generala category specified           by the opcode.
+     Description : It provides the mid level differentiation of operarions wwithin the generala category specified  by the opcode.
 
    
      rd
@@ -180,7 +180,7 @@ Instructins are classified in RISCv based on their formats and functionality:
 
 
 
-## 2.I type(Immediate):  
+  2.I type(Immediate):  
   Used for operations involving an immediate value.  
   Example: ADDI, SLTI, ANDI, ORI, XORI, LW.  
   Format:
@@ -200,12 +200,12 @@ Instructins are classified in RISCv based on their formats and functionality:
      funct3
      Size: 3 bits
      Location: Bits 12 to 14 of the instruction 
-     Description : It provides the mid level differentiation of operarions wwithin the generala category                     specified by the opcode.
+     Description : It provides the mid level differentiation of operarions wwithin the generala category specified by the opcode.
 
      rs1(source register 1)
      Size: 5 bits
      Location: Bits 15 to 19 of the instruction 
-     Description : It specifies the first source register in the instruction which indicates the ,first operand              for operation. Present in instruction types like R, S and B type.
+     Description : It specifies the first source register in the instruction which indicates the ,first operand for operation. Present in instruction types like R, S and B type.
 
      imm
      Size: 12 bits
@@ -213,7 +213,7 @@ Instructins are classified in RISCv based on their formats and functionality:
      Description: Represents a 12-bit immediate value used in the operation.
 
 
-## 3.S-Type():
+   3.S-Type():
    Used for storing instructions where data from a register is stored into memory. 
    Format:
      
@@ -249,8 +249,8 @@ Instructins are classified in RISCv based on their formats and functionality:
      Desription: Represents the upper 7 bits of the immediate value for address calculation.
      
 
-## 4.B-Type()
-   The B-type format in the RISC-V instruction set architecture (ISA) is used for conditional branch                       instructions. These instructions perform a comparison between two registers and branch to a specified                   instruction if the condition is met.
+   4.B-Type()
+   The B-type format in the RISC-V instruction set architecture (ISA) is used for conditional branch instructions. These instructions perform a comparison between two registers and branch to a specified instruction if the condition is met.
    Format:
      
 
@@ -295,7 +295,7 @@ Instructins are classified in RISCv based on their formats and functionality:
       Description: Represents the 12th bit of the immediate value used for address calculation.
       
 ## 5.U-Type
-  The U-type format is used for instructions that need a 20-bit immediate value. These instructions include               LUI (Load Upper Immediate) and AUIPC (Add Upper Immediate to PC).
+  The U-type format is used for instructions that need a 20-bit immediate value. These instructions include LUI (Load Upper Immediate) and AUIPC (Add Upper Immediate to PC).
      
       opcode:
       Size: 7 bits
@@ -362,21 +362,6 @@ Instructins are classified in RISCv based on their formats and functionality:
       Location: Bits 31
       Description: Represents bit 20 of the immediate value used for the jump target address.
 
-
-  Below is the list of instructions which we have to classify  
-       ADD r8, r9, r10  
-       SUB r10, r8, r9  
-       AND r9, r8, r10  
-       OR r8, r9, r5  
-       XOR r8, r8, r4  
-       SLT r00, r1, r4  
-       ADDI r02, r2, 5  
-       SW r2, r0, 4  
-       SRL r06, r01, r1  
-       BNE r0, r0, 20  
-       BEQ r0, r0, 15  
-       LW r03, r01, 2  
-       SLL r05, r01, r1    
 
   ADD r8, r9, r10  
   #R-Type Instruction Format     
