@@ -350,7 +350,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   - Description: Represents bit 20 of the immediate value.
 
 
-32 bit instructions:
+## RISC-V Instructions with Hexadecimal Encodings
+
 
   ADD r8, r9, r10  
   #R-Type Instruction Format  
@@ -360,8 +361,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   func3 - 000  
   rd - 01000  
   opcode - 0110011  
-  
-  `0000000 01010 01001 000 01000 0110011`
+  0000000 01010 01001 000 01000 0110011
+  Hex: 0x00a48433
 
   SUB r10, r8, r9  
   #R-Type Instruction Format  
@@ -371,8 +372,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   func3 - 000  
   rd - 01010  
   opcode - 0110011  
-  
-  `0100000 01001 01000 000 01010 0110011`
+  0100000 01001 01000 000 01010 0110011
+  Hex: 0x40a48533
 
   AND r9, r8, r10  
   #R-Type Instruction Format  
@@ -382,8 +383,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   func3 - 111  
   rd - 01001  
   opcode - 0110011  
-  
-  `0000000 01010 01000 111 01001 0110011`
+  0000000 01010 01000 111 01001 0110011
+  Hex: 0x00a407b3
 
   OR r8, r9, r5  
   #R-Type Instruction Format  
@@ -393,8 +394,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   func3 - 110  
   rd - 01000  
   opcode - 0110011  
-  
-  `0000000 00101 01001 110 01000 0110011`
+  0000000 00101 01001 110 01000 0110011
+  Hex: 0x0054c733
 
   XOR r8, r8, r4  
   #R-Type Instruction Format  
@@ -404,8 +405,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   funct3: 100  
   rd: 01000  
   opcode: 0110011  
-  
-  `0000000 00100 01000 100 01000 0110011`
+  0000000 00100 01000 100 01000 0110011
+  Hex: 0x00448633
 
   SLT r0, r1, r4  
   #R-Type Instruction Format  
@@ -415,18 +416,18 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   funct3: 010  
   rd: 00000  
   opcode: 0110011  
-  
-  `0000000  00100 00001 010 00000 0110011`
+  0000000 00100 00001 010 00000 0110011
+  Hex: 0x0040a033
 
-  ADDI r02, r2, 5  
+  ADDI r2, r2, 5  
   #I-Type Instruction Format  
   immediate: 000000000101  
   rs1: 00010  
   funct3: 000  
   rd: 00010  
   opcode: 0010011  
-  
-  `000000000101 00010 000 00010 0010011`
+  000000000101 00010 000 00010 0010011
+  Hex: 0x00510113
 
   SW r2, r0, 4  
   #S-Type Instruction Format  
@@ -435,10 +436,10 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   rs1: 00000  
   funct3: 010  
   opcode: 0100011  
-  
-  `0000000 00010 00000 010 00100 0100011`
+  0000000 00010 00000 010 00100 0100011
+  Hex: 0x00412023
 
-  SRL r06, r01, r1  
+  SRL r6, r1, r1  
   #R-Type Instruction Format  
   funct7: 0000000  
   rs2: 00001  
@@ -446,8 +447,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   funct3: 101  
   rd: 00110  
   opcode: 0110011  
-  
-  `0000000 00001 00001 101 00110 0110011`
+  0000000 00001 00001 101 00110 0110011
+  Hex: 0x001092b3
 
   BNE r0, r0, 20  
   #B-Type Instruction Format  
@@ -456,8 +457,8 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   rs1: 00000  
   funct3: 001  
   opcode: 1100011  
-  
-  `0000000 00000 00000 001 01000 1100011`
+  0000000 00000 00000 001 01000 1100011
+  Hex: 0x01400063
 
   BEQ r0, r0, 15  
   #B-Type Instruction Format  
@@ -466,29 +467,56 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   rs2: 00000  
   funct3: 000  
   opcode: 1100011  
-  
-  `0000000 00000 00000 000 01111 1100011`
+  0000000 00000 00000 000 01111 1100011
+  Hex: 0x00f00063
 
-  LW r03, r01, 2  
-  #I-type instruction format:  
+  LW r3, r1, 2  
+  #I-type instruction format  
   immediate: 000000000010  
   rs1: 00001  
   funct3: 010  
   rd: 00011  
   opcode: 0000011  
-  
-  `000000000010 00001 010 00011 0000011`
+  000000000010 00001 010 00011 0000011
+  Hex: 0x00210183
 
-  SLL r05, r01, r1  
-  #R-Type instruction format:  
+  SLL r5, r1, r1  
+  #R-Type instruction format  
   funct7: 0000000  
   rs2: 00001  
   rs1: 00001  
   funct3: 001  
   rd: 00101  
   opcode: 0110011  
+  0000000 00001 00001 001 00101 0110011
+  Hex: 0x001091b3
+
+
+
+  ### RISC-V Instructions and Hexadecimal Values Table
   
-  `0000000 00001 00001 001 00101 0110011`
+  | Instruction      | Hexadecimal Value |
+  |------------------|-------------------|
+  | ADD r8, r9, r10  | 0x00a48433        |
+  | SUB r10, r8, r9  | 0x40a48533        |
+  | AND r9, r8, r10  | 0x00a407b3        |
+  | OR r8, r9, r5    | 0x0054c733        |
+  | XOR r8, r8, r4   | 0x00448633        |
+  | SLT r0, r1, r4   | 0x0040a033        |
+  | ADDI r2, r2, 5   | 0x00510113        |
+  | SW r2, r0, 4     | 0x00412023        |
+  | SRL r6, r1, r1   | 0x001092b3        |
+  | BNE r0, r0, 20   | 0x01400063        |
+  | BEQ r0, r0, 15   | 0x00f00063        |
+  | LW r3, r1, 2     | 0x00210183        |
+  | SLL r5, r1, r1   | 0x001091b3        |
+
+
+
+
+
+
+  
 
   | Assembly Code        | Hardcoded Hex Value | 32-bit RISC-V Instruction (Hex) |
   |----------------------|---------------------|---------------------------------|
