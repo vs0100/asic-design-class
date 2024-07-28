@@ -132,7 +132,7 @@ We can do the same for other instructions as well.
 
 
 
-#**LAB 3**
+# **LAB 3**
 
 #To identify the type of instructions in RISCv as R, I, S, B, U, J type, understand the differences between manually coding 32 bit pattern of instructions and when the instructions are executed using RISCv ISA.
 
