@@ -379,14 +379,14 @@ Instructins are classified in RISCv based on their formats and functionality:
        LW r03, r01, 2
        SLL r05, r01, r1
 
-  ADD r8, r9, r10   :
-  #R-Type Instruction Format       
-  func7 - 0000000
-  rs2 - 01010
-  rs1 - 01001
-  func3 - 000
-  rd - 01000
-  opcode - 0110011
+  ADD r8, r9, r10  
+  #R-Type Instruction Format     
+  func7 - 0000000  
+  rs2 - 01010  
+  rs1 - 01001  
+  func3 - 000  
+  rd - 01000  
+  opcode - 0110011  
   ```
   0000000 01010 01001 000 01000 0110011
   ```
