@@ -349,6 +349,9 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   - Location: Bit 31  
   - Description: Represents bit 20 of the immediate value.
 
+
+32 bit instructions:
+
   ADD r8, r9, r10  
   #R-Type Instruction Format  
   func7 - 0000000  
