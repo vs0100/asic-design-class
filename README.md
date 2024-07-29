@@ -535,6 +535,9 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
   | sll r15, r1, r2(2)   | 32'h00208783        | 0x002087b3                      |
   | srl r16, r14, r2(2)  | 32'h00271803        | 0x002718b3                      |
 
+Waveform snapshots for command for Verilog netlist and testbench
+
+ /home/vaishnavi-sharma/Pictures/Screenshots/Screenshot from 2024-07-29 12-55-34.png
 
 
 
