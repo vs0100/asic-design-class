@@ -557,27 +557,30 @@ gtkwave iiitb_rv32i.vcd
 
 This command launches GTKWave and opens the specified VCD file, to visually inspect the waveforms and analyze the behavior of Verilog design and testbench.
 
+ADD 
+
+![Your paragraph text (1)](https://github.com/user-attachments/assets/b7027ff8-64eb-4a5b-89ac-dea30e2b5749)
 
 
+![Your paragraph text](https://github.com/user-attachments/assets/c3c70c0e-f9d6-4ff1-97bc-ebb4cbf797c3)
 
 
+![output of 3 and 1 will be 1 (0011) (0001) = (0001)](https://github.com/user-attachments/assets/70005853-ba64-44aa-89ff-99acfb30d479)
+  
 
-   
-   
-    
-
-     
-     
-     
-
-     
+![value stored in register R0](https://github.com/user-attachments/assets/a8d327c7-dfe5-4610-8dbb-67f2e569a5c8)
 
      
+![output of 2  5 will be 7 (0010)  (0101) = (0111)](https://github.com/user-attachments/assets/3cc92644-9524-42a8-9962-402a19cc668e)
+
+     
+![Values stored in two different registers](https://github.com/user-attachments/assets/5eb768f6-09ec-42fc-93db-9a1c355dea2d)
+
+
+![32 bit instruction for SUB R7, R1, R2](https://github.com/user-attachments/assets/7876f010-14eb-4a0b-9779-c7581ca3c2d0)
 
    
-   
-
-   
+![Untitled design](https://github.com/user-attachments/assets/54035e1f-6630-493a-948e-e353ee2f2208)
 
 
 
