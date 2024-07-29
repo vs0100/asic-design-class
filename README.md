@@ -134,7 +134,7 @@ We can do the same for other instructions as well.
 
 # **LAB 3**
 
-## To identify the type of instructions in RISC-V as R, I, S, B, U, J type, understand the differences between manually coding 32-bit pattern of instructions and when the instructions are executed using RISC-V ISA.
+## To identify the type of instructions in RISC-V as R, I, S, B, U, J type, understand the differences between hardcoding 32-bit pattern of instructions and when the instructions are executed using RISC-V ISA.
 
 ### Different Types of Instructions in RISC-V
 
