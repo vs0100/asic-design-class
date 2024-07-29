@@ -537,11 +537,25 @@ The J-type format is primarily used for jump instructions, such as JAL (Jump and
 
 Waveform snapshots for command for Verilog netlist and testbench
 
- /home/vaishnavi-sharma/Pictures/Screenshots/Screenshot from 2024-07-29 12-55-34.png
+![Screenshot from 2024-07-29 12-55-34](https://github.com/user-attachments/assets/a4422c3d-d251-4c78-bbc6-8bb002c71959)
 
+We obtained the following waveforms by executing the following commands on terminal:
 
+```
+iverilog -o iiitb_rv32i_tb iiitb_rv32i.v iiitb_rv32i_tb.v
+```
+This command compiles the Verilog source files and generates an executable named iiitb_rv32i_tb.
 
+```
+vvp iiitb_rv32i_tb
+```
+This command executes the simulation, and during this process, it generates a Value Change Dump (VCD) file (named iiitb_rv32i.vcd specified in the testbench).
 
+```
+gtkwave iiitb_rv32i.vcd
+```
+
+This command launches GTKWave and opens the specified VCD file, to visually inspect the waveforms and analyze the behavior of Verilog design and testbench.
 
 
 
