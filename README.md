@@ -709,7 +709,7 @@ int main()
 
 ![Screenshot from 2024-08-14 10-47-45](https://github.com/user-attachments/assets/5db17abd-bdac-4cda-b59d-f84953b22a4f)
 
-4. Comparing the oyputs of both
+4. Comparing the oytputs of both
 
 ![Screenshot from 2024-08-14 10-50-03](https://github.com/user-attachments/assets/7b63b14b-9097-487c-bc60-a79a795127f6)
 
