@@ -613,6 +613,109 @@ BEQ R0, R0, 15
 
 </details>
 
+<details>
+  <summary>Lab 4</summary>
+Task : To verify the output through gcc compiler and riscv compiler
+Steps:
+  
+1. Write a code which can be compiled using gcc and riscv gcc
+   
+  ```#include <limits.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+#define V 9	
+
+int minDistance(int dist[], bool sptSet[])	
+{
+    // Initialize min value
+    int min = INT_MAX, min_index;
+
+    for (int v = 0; v < V; v++)
+        if (sptSet[v] == false && dist[v] <= min)
+            min = dist[v], min_index = v;
+
+    return min_index;
+}
+
+
+void printSolution(int dist[])
+{
+    printf("Vertex \t\t Distance from Source\n");
+    for (int i = 0; i < V; i++)
+        printf("%d \t\t\t\t %d\n", i, dist[i]);
+}
+
+void dijkstra(int graph[V][V], int src)
+{
+    int dist[V]; 
+
+    bool sptSet[V]; 
+
+    
+    for (int i = 0; i < V; i++)
+        dist[i] = INT_MAX, sptSet[i] = false;
+
+   
+    dist[src] = 0;
+
+    
+    for (int count = 0; count < V - 1; count++) {
+        
+        int u = minDistance(dist, sptSet);
+
+        
+        sptSet[u] = true;
+
+        
+        for (int v = 0; v < V; v++)
+
+           
+            if (!sptSet[v] && graph[u][v]
+                && dist[u] != INT_MAX
+                && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+    }
+
+   
+    printSolution(dist);
+}
+
+
+int main()
+{
+   
+    int graph[V][V] = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+                        { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+                        { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
+                        { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
+                        { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
+                        { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
+                        { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
+                        { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+                        { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+
+    
+    dijkstra(graph, 0);
+
+    return 0;
+}
+```
+2. Compile the code using gcc
+
+![Screenshot from 2024-08-14 10-47-36](https://github.com/user-attachments/assets/87c8daa8-6af9-4adf-b248-daab4f6cd8c9)
+
+3.Compile the code using riscv gcc
+
+![Screenshot from 2024-08-14 10-47-45](https://github.com/user-attachments/assets/5db17abd-bdac-4cda-b59d-f84953b22a4f)
+
+4. Comparing the oyputs of both
+
+![Screenshot from 2024-08-14 10-50-03](https://github.com/user-attachments/assets/7b63b14b-9097-487c-bc60-a79a795127f6)
+
+Conlusion:
+Output of GCC and RISCV are same
+</details>
 
 
 
