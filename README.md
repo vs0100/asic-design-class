@@ -1,4 +1,6 @@
 # asic-design-class
+<details>
+<summary>Lab 1</summary>
 LAB1
 
 Task1: Create a C program and verify it using gcc compiler.
@@ -54,11 +56,12 @@ STEPS:
 INITIAL AND FINAL OUTPUT
 ![Screenshot from 2024-07-17 08-11-55](https://github.com/user-attachments/assets/60c5e1ee-1179-4bec-8dd8-0b661dbd5b32)
 
+</details>
 
 
-
+<details>
 # LAB2
-
+<summary>Lab 2</summary>
 
 In Lab1 we compiled and executed our C code on gcc compiler, also in the second task we compiled our code on riscv compiler.
 In this lab we will compile, execute and debug C code using riscv Simulator in Spike Simulation environment
@@ -128,10 +131,11 @@ After the execution of instruction it had 0x0000003ffffffb40
 ![Screenshot from 2024-07-22 18-33-49](https://github.com/user-attachments/assets/8261d937-119d-425e-a719-263faf653f87)
 
 We can do the same for other instructions as well.
+</details>
 
 
-
-
+<details>
+  <summary>Lab 3</summary>
 # **LAB 3**
 
 ## To identify the type of instructions in RISC-V as R, I, S, B, U, J type, understand the differences between hardcoding 32-bit pattern of instructions and when the instructions are executed using RISC-V ISA.
@@ -607,7 +611,7 @@ BEQ R0, R0, 15
 ![value stored in register R0](https://github.com/user-attachments/assets/a8d327c7-dfe5-4610-8dbb-67f2e569a5c8)      
 
 
-
+</details>
 
 
 
