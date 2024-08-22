@@ -1142,9 +1142,10 @@ Attached is the image of the fully pipelined CPU
 
 ![Screenshot 2024-08-22 024458](https://github.com/user-attachments/assets/4dccdd38-f011-41a8-9fa3-c3cb9e95abc7)
 
+![Screenshot (448)](https://github.com/user-attachments/assets/1357ac00-2aca-41ae-9b08-627b99c534dd)
 
 
-![Screenshot (447)](https://github.com/user-attachments/assets/68761b37-96a2-4160-9d90-d50aaac1cf20)
+
 
 
 ![Screenshot (445)](https://github.com/user-attachments/assets/1c03eebc-106f-4b94-9904-c915b8edb9a5)
