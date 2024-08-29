@@ -1157,7 +1157,7 @@ Attached is the image of the fully pipelined CPU
 #  Task - Conversion of TLV code into Verilog code using Sandpiper and then simulate it using iverilog and GTKwave
 
 
-1. Install the given packages using the given command
+1. Install the packages using the given command
    
 ```
    sudo apt install make python python3 python3-pip git iverilog gtkwave
@@ -1202,7 +1202,7 @@ Attached is the image of the fully pipelined CPU
 
 Comparison with Makerchip results
 
-From GTK waveform
+From GTK wave
 ![Screenshot from 2024-08-27 02-45-01](https://github.com/user-attachments/assets/4a7cd729-475b-486e-b59c-e5bc78a07fb2)
 
 From Makerchip IDE
