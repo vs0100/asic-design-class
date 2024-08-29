@@ -1159,13 +1159,13 @@ Attached is the image of the fully pipelined CPU
 
 1. Install the given packages using the given command
    
-   ```
+```
    sudo apt install make python python3 python3-pip git iverilog gtkwave
    sudo apt-get install python3-venv
    python3 -m venv .venv
    source ~/.venv/bin/activate
    pip3 install pyyaml click sandpiper-saas
-   ```
+```
 
 2. Clone the repositry and move into the required repositry
    
