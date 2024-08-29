@@ -1157,14 +1157,14 @@ Attached is the image of the fully pipelined CPU
 
  
 #  Task - Conversion of TLV code into Verilog code using Sandpiper and then simulate it using iverilog and GTKwave
-1. Install the given packages using the given command
+
+1. Install the packages using the given command
    ```
    sudo apt install make python python3 python3-pip git iverilog gtkwave
    sudo apt-get install python3-venv
    python3 -m venv .venv
    source ~/.venv/bin/activate
    pip3 install pyyaml click sandpiper-saas
-   
    ```
 2. Clone the repositry and move into the required repositry
    ```
@@ -1173,16 +1173,16 @@ Attached is the image of the fully pipelined CPU
    ```
 3.Converte .tllv file into .v file
    ```
-  sandpiper-saas -i home/vsduser/VSDBabySoC/src/module/bhavana_rvmyth.tlv -o bhavana_rvmyth.v --bestsv -- 
+  sandpiper-saas -i home/vsduser/VSDBabySoC/src/module/vaishnavi_rvmyth.tlv -o vaishnavi_rvmyth.v --bestsv -- 
   noline -p verilog --outdir home/vsduser/VSDBabySoC/src/module/
   make pre_synth_sim
   ```
 4. Compile amd simulate using the following command
   ```
-  iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM home/vsduser/VSDBabySoC/src/module/testbench.v -I 
-  src/include -I home/vsduser/VSDBabySoCsrc/module
+   iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM home/vsduser/VSDBabySoC/src/module/testbench.v -I 
+   src/include -I home/vsduser/VSDBabySoCsrc/module
    cd output
-  ./pre_synth_sim.out
+   ./pre_synth_sim.out
   ```
 5. Open the waveform using the following command
    ```
