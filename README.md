@@ -897,7 +897,7 @@ Makerchip IDE
    |cpu
       @0
          $reset = *reset;
-         
+         $clk_vai = *clk;
          //PC fetch - branch, jumps and loads introduce 2 cycle bubbles in this pipeline
          $pc[31:0] = >>1$reset ? '0 : (>>3$valid_taken_br ? >>3$br_tgt_pc :
                                        >>3$valid_load     ? >>3$inc_pc[31:0] :
