@@ -1237,3 +1237,588 @@ Here is the output of gtkWave
 
 
 </details>
+
+
+<details>
+<summary>Lab 8</summary>
+
+ <details>
+ <summary>Day 0 </summary>
+
+ # Software Installation
+
+  <details>
+  <summary>Yosys</summary>
+
+```
+     git clone https://github.com/YosysHQ/yosys.git 
+     cd yosys-master  
+     sudo apt install make  
+     sudo apt-get install build-essential clang bison flex \ 
+     	libreadline-dev gawk tcl-dev libffi-dev git \ 
+     	graphviz xdot pkg-config python3 libboost-system-dev \ 
+     	libboost-python-dev libboost-filesystem-dev zlib1g-dev 
+     make  
+     sudo make install
+
+  ``` 
+  </details>
+  
+  <details>
+  <summary>Iverilog</summary>
+	  
+  ```
+	sudo apt-get install iverilog
+  ```
+
+  </details>
+
+
+
+
+  <details>
+  <summary>GTKWave</summary>
+	  
+```
+sudo apt-get install gtkwave
+```
+  </details>
+
+
+
+
+  <details>
+  <summary>NgSpice</summary>
+	  
+```
+tar -zxvf ngspice-40.tar.gz
+cd ngspice-40
+mkdir release
+cd release
+../configure  --with-x --with-readline=yes --disable-debug
+make
+sudo make install								
+```
+</details>
+
+
+<details>
+<summary>Magic</summary>
+	
+```
+sudo apt-get install m4
+sudo apt-get install tcsh
+sudo apt-get install csh
+sudo apt-get install libx11-dev
+sudo apt-get install tcl-dev tk-dev
+sudo apt-get install libcairo2-dev
+sudo apt-get install mesa-common-dev libglu1-mesa-dev
+sudo apt-get install libncurses-dev	
+```
+ </details>
+
+
+  <details>
+  <summary>OpenSTA</summary>
+
+```
+sudo apt-get install cmake clang gcctcl swig bison flex
+git clone https://github.com/The-OpenROAD-Project/OpenSTA.git
+cd OpenSTA
+mkdir build
+cd build
+cmake ..
+make	
+```
+  </details>
+
+
+
+  <details>
+  <summary>OpenLANE</summary>
+	  
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install -y build-essential python3 python3-venv python3-pip make git
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+sudo docker run hello-world
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo reboot 
+
+# After reboot
+docker run hello-world
+
+```
+
+
+</details>
+</details>
+
+<details>
+<summary>DAY1</summary>
+	
+
+<details>
+	<summary>Introduction to Verilog RTL design and Synthesis</summary>
+	
+**RTL** Design - 
+Register transfer level design, or RTL design, is a technique that allows us to move data across registers. In RTL design, we use HDL (Hardware Description Language) programs like Verilog or VerilogHDL to write code for both sequential and combinational circuits. These programs may simulate both hardware and logical functions. An RTL design can consist of a single Verilog code or several. A crucial point to remember is that RTL designs must be written with efficient and synthesizable (physical gate-realizable) code.   
+**Testbench** -
+Verilog allows us to create test benches that simulate the behavior of a hardware design by providing input signals and checking the resulting output signals. This is crucial for larger and more complex designs, as it helps ensure that the simulation results align with the actual hardware behavior after synthesis. A test bench typically consists of two parts: one that generates input signals for the design under test, and another that verifies the correctness of the output signals. This approach can be summarized as follows :  
+![test](https://github.com/user-attachments/assets/4965e89b-18d3-4e32-b0cf-a9d7c6304bc6)
+
+**Simulation** -
+RTL designs can be verified against their specifications by simulating them with various input samples. This process helps identify and correct errors in the design early on in the development cycle.   
+**Simulator** -
+Simulator is the software tool used to execute RTL designs and verify their behavior. It monitors changes in input signals and calculates the corresponding output signals. If there are no changes to the input signals, the simulator will not observe any changes in the output signals.   
+**Iverilog** - 
+Iverilog is a free and open-source Verilog simulator that can be used to verify the functionality of digital circuits. It supports various Verilog language features, including modules, ports, wires, registers, gates, and behavioral descriptions.  
+**gtkWave** -
+GtkWave is a free and open-source waveform viewer that is commonly used in digital design and verification. It provides a graphical interface for visualizing and analyzing digital waveforms, making it a valuable tool for debugging and understanding the behavior of hardware designs.   
+
+**Lab Examples using iverilog and gtkWave**
+1. Cloning the github repository using the following command to install the necessary code files into system which will be used for synthesis and generation
+   
+```
+$git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+```
+2. Simulation of verilog code and visualizing the results   
+
+We performed simulation of multiplexer. After the simulation in iverilog the generated vcd file is viewed using gtkwave to view the output waveforms.The output was generated using the inputs given in testbench.
+
+Mutiplexer code:
+
+```
+
+module good_mux (input i0 , input i1 , input sel , output reg y);
+always @ (*)
+begin
+	if(sel)
+		y <= i1;
+	else 
+		y <= i0;
+end
+endmodule
+```
+
+Testbench Code:
+
+```
+`timescale 1ns / 1ps
+module tb_good_mux;
+// Inputs
+reg i0,i1,sel;
+// Outputs
+wire y;
+  		// Instantiate the Unit Under Test (UUT), name based instantiation
+	good_mux uut (.sel(sel),.i0(i0),.i1(i1),.y(y));
+	//good_mux uut (sel,i0,i1,y);  //order based instantiation
+initial begin
+	$dumpfile("tb_good_mux.vcd");
+	$dumpvars(0,tb_good_mux);
+	// Initialize Inputs
+	sel = 0;
+	i0 = 0;
+	i1 = 0;
+	#300 $finish;
+end
+always #75 sel = ~sel;
+always #10 i0 = ~i0;
+always #55 i1 = ~i1;
+endmodule
+
+```
+
+
+ 
+</details>
+<details>
+	<summary>Introduction to Yosys synthesizer</summary>
+	
+**Synthesis:**
+Synthesis is the process of transforming a high-level design into a low-level netlist of logic gates, tailored to a specific technology library. It involves breaking down the design into basic logic components, mapping them to actual gates, and optimizing the resulting netlist to meet design constraints. This process ensures that the abstract design can be realized as a physical hardware implementation.	
+	
+**Synthesizer:**
+It is a tool we use to convert out RTL design code to netlist. Yosys is the tool I've used in this workshop. 
+
+Flow of the above process is as follows:
+
+![synthesis](https://github.com/user-attachments/assets/213fa416-0011-4cde-aad4-dc4c013b810d)
+
+
+
+**YoSys:**
+Yosys is a synthesis tool that converts high-level hardware designs into optimized gate-level representations that can be targeted for various FPGA and ASIC technologies. We can use Yosys by providing our RTL design and a standard cell library file. The tool will then synthesize the design and generate a netlist file.
+Below are the commands to perform above synthesis.
+RTL Design - read_verilog
+.lib - read_liberty
+netlist file- write_verilog
+
+**Operational FLow of Yosys Sythesizer**
+![op_flow](https://github.com/user-attachments/assets/d4e5a6e6-76db-475d-a1e3-6334a813c36d)
+
+
+**Verification of Synthesized Design:**
+To make sure design has no errors, we verify the given netlist.
+The netlist verification flow can be seen as
+![veri](https://github.com/user-attachments/assets/b11683b8-b6b2-47cf-9d13-20299fcbb9a0)
+
+
+Gtkwave output for the RTL design using iVerilog should match the output waveform for the yosys netlist. As netlist and design code have the same set of inputs nad outputs we can use the same testbench and compare the waveforms.
+
+**Lab on Yosys Introduction**
+
+Move to the lib directory and invoke yosys to generate the synthesis of our design using the following commands:
+
+```
+yosys> read_liberty -lib <give the path to lib file>
+yosys> read_verilog <give the path to verilog file>
+yosys> synth -top <top_module_name>
+yosys> abc -liberty <give the path to lib file>
+yosys> show
+
+```
+Output of the synthesized design is as follows:
+
+![Screenshot from 2024-10-20 17-09-42](https://github.com/user-attachments/assets/09f4f5da-ade3-4210-80b2-d6e96c960cbf)
+
+![Screenshot from 2024-10-20 17-11-05](https://github.com/user-attachments/assets/dcac2f2c-d3c9-48f7-9795-52878f2a8083)
+
+Run the following code to generate the netlist file :
+
+```
+yosys> write_verilog good_mux_netlist.v
+yosys> write_verilog -noattr good_mux_netlist.v
+```
+The below image shows the netlist file:
+
+![Screenshot from 2024-10-20 16-37-47](https://github.com/user-attachments/assets/065b6b9b-6ff8-4b93-95d3-cee801ca1040)
+
+
+</details>
+
+</details>
+
+
+
+<details>
+<summary >DAY 2</summary> 
+<details>
+<summary>Timing Libs, hierarchial, flat synthesis, efficient flop coding styles</summary>
+<details>
+<summary>Introduction to timing .libs</summary>
+	
+```
+ sky130_fd_sc_hd__tt_025C_1v80.lib
+ ```
+Signinficance for the above terms
+	
+***130** 130nm library  
+**tt** sugnifies the process which is typical  
+**025c** signifies the temperature  
+**1v80** signifies the voltage  
+
+Using this lib file, we get access to different types of cells which has vast number of variants in terms of number of inputs and ouputs along with the functionality.
+
+Leakage power, delay, area, power ports of all the cells is specified within the file for all the input combinations of the given gate.
+
+ ![Screenshot from 2024-10-20 18-14-22](https://github.com/user-attachments/assets/ff5e300e-e4b3-4aee-8c96-2827339b0325)
+
+![Screenshot from 2024-10-20 18-16-02](https://github.com/user-attachments/assets/f2d8b3d7-a085-4e7f-8b6e-720326712ceb)
+
+This image displays the power consumtion and delay comparison.
+For power : and2_0 < and2_2 < and_4
+For delay : and2_0 > and2_2 > and2_4
+![Screenshot from 2024-10-20 18-23-47](https://github.com/user-attachments/assets/3590e07c-98a1-4245-b320-c160934a8572)
+
+
+</details>
+<details>
+<summary>Hierarchial Synthesis vs Flat Synthesis</summary>
+	
+**multiple_module**
+
+Explaination for Hierarchial and Flat Synthesis using an example module given below
+This is the verilog code for module
+```
+module sub_module2 (input a, input b, output y);
+	assign y = a | b;
+endmodule
+
+module sub_module1 (input a, input b, output y);
+	assign y = a&b;
+endmodule
+
+
+module multiple_modules (input a, input b, input c , output y);
+wire net1;
+sub_module1 u1(.a(a),.b(b),.y(net1));  //net1 = a&b
+sub_module2 u2(.a(net1),.b(c),.y(y));  //y = net1|c ,ie y = a&b + c;
+endmodule
+```
+Launch yosys using the following command
+```
+$ yosys
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog multiple_modules.v
+yosys> synth -top multiple_modules
+yosys> show multiple_modules 
+
+```
+The following report is generated
+![Screenshot from 2024-10-20 18-44-29](https://github.com/user-attachments/assets/a4e583e4-6ba0-492f-9559-f8f599ffc5c3)
+
+
+For the above verilog code thos is the schematic which should be generated
+
+
+
+But, the Yosys synthesiser generates the following schematic instesd of the above one and within the submodules
+![Screenshot from 2024-10-20 19-23-32](https://github.com/user-attachments/assets/bf53240d-45a5-4909-ada6-5cbfe73caac1)
+
+Generating netlist using the following commands:
+
+```
+yosys> write_verilog -noattr multiple_modules_hier.v  
+yosys> !gvim multiple_modules_hier.v
+```
+
+Generated netlist is
+![Screenshot from 2024-10-20 19-26-56](https://github.com/user-attachments/assets/02b91218-198e-4f00-8476-1131e4bce8da)
+
+The generated netlist is a hierarchial netlist
+
+
+Now we will use the following commands to flatten the netlist:
+
+```
+yosys> flatten
+yosys> write_verilog -noattr multiple_modules_flat.v
+yosys> !gvim multiple_modules_flat.v
+```
+Below is the schematic
+![Screenshot from 2024-10-20 19-40-28](https://github.com/user-attachments/assets/f15b51a9-a764-43aa-9bd5-2fc4595d2329)
+
+
+The following netlist will be obtained
+![Screenshot from 2024-10-20 19-30-00](https://github.com/user-attachments/assets/78dccab9-7d6d-4fa0-9403-d02f0d535543)
+
+We can also do the entire process/synthesis even for a single submodule using the following command:
+
+```
+yosys> synth -top sub_module1
+```
+</details>
+<details>
+	<summary>Various Flop Coding styles and Optimization</summary>
+In this session we learnt about how to code various types of flops and various styles of coding a flop
+
+Why Use a Flop?
+
+In combinational circuits, generating the corresponding output for given inputs involves some propagation delay. During this delay, intermediate outputs can appear due to various paths within the circuit, which are known as glitches. The more complex the combinational logic, the higher the likelihood of these glitches, leading to unstable output signals.
+
+To eliminate glitches, we use an element called a flop. A flop stores the output of the combinational circuit, allowing it to become the input to the next stage only when a clock edge (either rising or falling) occurs. This approach ensures that the input to the subsequent combinational circuit remains stable, thereby reducing glitches.
+
+It’s important to initialize the flop; otherwise, the next stage of combinational logic could receive undefined (garbage) values. This initialization is managed through control signals like reset and set.
+
+Flop Coding Styles
+
+- Asynchronous reset
+- Synchronous reset
+- Asynchronous set
+- Synchronous set
+- Both Asynchronous reset and Synchronous reset
+- Both Asynchronous set and Synchronous set
+
+
+Lab-Flop synthesis simulations
+**d-flipflop with asynchronous reset**
+Here the output q goes low whenever reset is high and will not wait for the clock's posedge, i.e irrespective of clock, the output is changed to low.
+
+```
+ module dff_asyncres ( input clk ,  input async_reset , input d , output reg q );
+	always @ (posedge clk , posedge async_reset)
+	begin
+		if(async_reset)
+			q <= 1'b0;
+		else	
+			q <= d;
+	end
+endmodule
+```
+We generate the output using the following commands:
+
+```
+$ iverilog dff_async_set.v tb_dff_async_reset.v
+$ ./a.out
+$ gtkwave tb_dff_async_reset.vcd
+```
+The output is shown below:
+![Screenshot from 2024-10-20 20-12-57](https://github.com/user-attachments/assets/aac36480-8de2-47e3-8f61-f287fec3436b)
+
+Synthesizing using Yosys:
+Use the commands given below:
+```
+yosys
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog dff_asyncres.v 
+yosys> synth -top dff_asyncres
+yosys> dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+yosys> show
+```
+![Screenshot from 2024-10-20 20-29-35](https://github.com/user-attachments/assets/4ff5fc60-c688-48c5-a0fd-cf330e95e54f)
+
+**dflipflop with Synchronous reset**
+Use the following commands
+```
+yosys
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog dff_async_set.v 
+yosys> synth -top dff_async_set
+yosys> dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+yosys> show
+```
+We obtain the asynchronous set flop structure:
+![Screenshot from 2024-10-20 20-33-41](https://github.com/user-attachments/assets/abbc7027-effc-4b84-9076-5239305bd4ca)
+
+**Synchronous Reset Flop**
+The output changes only when the clock changes i.e., depends on the clock. The below figure clearly explains the synchronous reset mode.
+The verilog code for synchronous reset is :
+```
+module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+always @ (posedge clk )
+begin
+	if (sync_reset)
+		q <= 1'b0;
+	else	
+		q <= d;
+end
+endmodule
+```
+Use the following commands:
+```
+yosys
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog dff_syncres.v 
+yosys> synth -top dff_syncres
+yosys> dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+yosys> show
+```
+Synthesized Circuit
+![Screenshot from 2024-10-20 20-44-42](https://github.com/user-attachments/assets/81a390ff-b394-40dd-97a0-348e08947b50)
+
+Gtkwave waveform
+![Screenshot from 2024-10-20 20-52-27](https://github.com/user-attachments/assets/5255c88f-bae0-464e-b436-386786179473)
+
+**d-flipflop with Synchronous/Asynchronous reset**
+Verilog code:
+```
+module dff_asyncres_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+always @ (posedge clk , posedge async_reset)
+begin
+    if(async_reset)
+            q <= 1'b0;
+    else if (sync_reset)
+            q <= 1'b0;
+    else
+            q <= d;
+end
+endmodule
+```
+Gtkwaave waveform
+![Screenshot from 2024-10-20 21-05-48](https://github.com/user-attachments/assets/16687ebc-ff4d-4ffc-b2c8-be029b9f3604)
+
+Synthesis
+![Screenshot from 2024-10-20 21-25-46](https://github.com/user-attachments/assets/4a53b7c5-2998-4b56-b6e0-0a593b246f33)
+</details>
+
+<details>
+	<summary>Interesting Optimizations</summary>
+This lab session deals with some automatic and interesting optimisations of the circuits based on logic. In the below example, multiplying a number with 2 doesn't need any additional hardeware and only needs connecting the bits from a to y and grounding the LSB bit of y is enough and the same is realized by Yosys.
+	
+```
+module mul2 (input [2:0] a, output [3:0] y);
+	assign y = a * 2;
+endmodule
+```
+Using the commands given below:
+```
+yosys
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog mult_2.v 
+yosys> synth -top mul2
+yosys> dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+yosys> show
+```
+Synthesized design
+![Screenshot from 2024-10-20 21-32-54](https://github.com/user-attachments/assets/b3afa963-695b-4396-8e1b-d0b35507efb5)
+
+Generating netlist using the following commands:
+```
+yosys> write_verilog -noattr mul2_net.v
+yosys> !gvim mul2_net.v
+```
+The generated netlist is as follows:
+![Screenshot from 2024-10-20 21-35-13](https://github.com/user-attachments/assets/fbdde11a-4ce9-4226-8bb8-c79321dee2d8)
+
+Let us now synthesize mult_8 using the following commands:
+```
+yosys
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog mult_8.v 
+yosys> synth -top mult8
+yosys> dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+yosys> show
+```
+
+Synthesized Circuit:
+![Screenshot from 2024-10-20 21-39-04](https://github.com/user-attachments/assets/c0e77cb7-3bf4-44d2-b9a7-47155cbdcdf0)
+
+Netlist is generated using the following commands:
+```
+yosys> write_verilog -noattr mult8_net.v
+yosys> !gvim mult8_net.v
+```
+The generated netlist is as follows:
+![Screenshot from 2024-10-20 21-41-22](https://github.com/user-attachments/assets/135e8bb2-749d-414f-9418-477cb1c01f91)
+
+
+</details>
+
+
+
+
+</details>
+</details>
+
+
+<details>
+<summary >DAY 3</summary>
+
+</details>
+
+
+<details>
+<summary >DAY 4</summary> 
+
+</details>
+
+
+</details>
