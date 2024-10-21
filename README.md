@@ -1810,22 +1810,27 @@ The generated netlist is as follows:
 
 <details>
 <summary >DAY 3</summary>
-Combinational logic optimization with examples
+	
+## Combinational and Sequential Optimizations##
+
 Optimising the combinational logic circuit is squeezing the logic to get the most optimized digital design so that the circuit finally is area and power efficient. This is achieved by the synthesis tool using various techniques and gives us the most optimized circuit.
 
 **Techniques for Optimizatin**
--Constant propagation which is Direct optimizxation technique
--Boolean logic optimization using K-map or Quine McKluskey
+* Constant propagation which is Direct optimizxation technique
+* Boolean logic optimization using K-map or Quine McKluskey
 
 In the above example, if we considor the trasnsistor level circuit of output Y, it has 6 MOS trasistors and when it comes to invertor, only 2 transistors will be sufficient. This is achieved by making A as contstant and propagating the same to output.
 
 Example for Boolean logic optimization:
 
-Let's consider an example concurrent statement **assign y=a?(b?c:(c?a:0)):(!c)**
+Let's consider an example concurrent statement  
+**assign y=a?(b?c:(c?a:0)):(!c)**
 
-The above expression is using a ternary operator which realizes a series of multiplexers, however, when we write the boolean expression at outputs of each mux and simplify them further using boolean reduction techniques, the outout y turns out be just **~(a^c)**
+The above expression is using a ternary operator which realizes a series of multiplexers, however, when we write the boolean expression at outputs of each mux and simplify them further using boolean reduction techniques, the outout y turns out be just  
+**~(a^c)**
 
-Command to optimize the circuit by yosys is **yosys> opt_clean -purge**
+Command to optimize the circuit by yosys is  
+**yosys> opt_clean -purge**
 
 **Example-1**
 
