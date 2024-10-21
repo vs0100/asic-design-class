@@ -1243,7 +1243,7 @@ Here is the output of gtkWave
 <summary>Lab 8</summary>
 
  <details>
- <summary>DAY 0 </summary>
+ <summary>Day 0 </summary>
 
  # Software Installation
 
@@ -1255,9 +1255,9 @@ Here is the output of gtkWave
      cd yosys-master  
      sudo apt install make  
      sudo apt-get install build-essential clang bison flex \ 
-     libreadline-dev gawk tcl-dev libffi-dev git \ 
-     graphviz xdot pkg-config python3 libboost-system-dev \ 
-     libboost-python-dev libboost-filesystem-dev zlib1g-dev 
+     	libreadline-dev gawk tcl-dev libffi-dev git \ 
+     	graphviz xdot pkg-config python3 libboost-system-dev \ 
+     	libboost-python-dev libboost-filesystem-dev zlib1g-dev 
      make  
      sudo make install
 
@@ -1274,6 +1274,8 @@ Here is the output of gtkWave
   </details>
 
 
+
+
   <details>
   <summary>GTKWave</summary>
 	  
@@ -1281,6 +1283,8 @@ Here is the output of gtkWave
 sudo apt-get install gtkwave
 ```
   </details>
+
+
 
 
   <details>
@@ -1736,7 +1740,7 @@ begin
 end
 endmodule
 ```
-Gtkwave waveform
+Gtkwaave waveform
 ![Screenshot from 2024-10-20 21-05-48](https://github.com/user-attachments/assets/16687ebc-ff4d-4ffc-b2c8-be029b9f3604)
 
 Synthesis
@@ -1809,23 +1813,19 @@ The generated netlist is as follows:
 Combinational logic optimization with examples
 Optimising the combinational logic circuit is squeezing the logic to get the most optimized digital design so that the circuit finally is area and power efficient. This is achieved by the synthesis tool using various techniques and gives us the most optimized circuit.
 
-**Techniques for Optimization**
-- Constant propagation which is Direct optimization technique
-- Boolean logic optimization using K-map or Quine McKluskey
+**Techniques for Optimizatin**
+-Constant propagation which is Direct optimizxation technique
+-Boolean logic optimization using K-map or Quine McKluskey
 
 In the above example, if we considor the trasnsistor level circuit of output Y, it has 6 MOS trasistors and when it comes to invertor, only 2 transistors will be sufficient. This is achieved by making A as contstant and propagating the same to output.
 
 Example for Boolean logic optimization:
 
-Let's consider an example concurrent statement 
-
-**assign y=a?(b?c:(c?a:0)):(!c)**
+Let's consider an example concurrent statement **assign y=a?(b?c:(c?a:0)):(!c)**
 
 The above expression is using a ternary operator which realizes a series of multiplexers, however, when we write the boolean expression at outputs of each mux and simplify them further using boolean reduction techniques, the outout y turns out be just **~(a^c)**
 
-Command to optimize the circuit by yosys is 
-
-**yosys> opt_clean -purge**
+Command to optimize the circuit by yosys is **yosys> opt_clean -purge**
 
 **Example-1**
 
@@ -2228,6 +2228,8 @@ Blocking statements execute the statemetns in the order they are written inside 
 	<summary>Lab- GLS Synth Sim Mismatch</summary>	
 	
 **Example-1**
+There is no mismatch in this example as the netlist simulation and rtl simulation waveform are similar only.
+
 	
 ```
 module ternary_operator_mux (input i0 , input i1 , input sel , output y);
@@ -2272,6 +2274,7 @@ endmodule
 
 
 **Synthesis**
+![Screenshot from 2024-10-22 04-06-19](https://github.com/user-attachments/assets/fc45f76e-aca9-478f-b8ca-4b99d5930b22)
 
 
 **Netlist Simulation**
@@ -2281,11 +2284,15 @@ iverilog ../my_lib/verilog_module/primitives.v ../my_lib/verilog_module/sky130_f
 ./a.out
 gtkwave tb_bad_mux.vcd
 ```
+![Screenshot from 2024-10-22 04-09-29](https://github.com/user-attachments/assets/279e81b8-a6e3-4e1c-9a89-e87cd8311509)
 
 
 **Mismatch**
 
-![image](https://github.com/user-attachments/assets/5fcecd22-c6a3-427b-aa89-dd1fb0f068dc)
+Here first pic shows the netlist simulation which corrects the bad_mux design which was only changing waveform when sel was triggered while for a mux to work properly it should be sensitivity to all the input signals
+
+
+![Screenshot from 2024-10-22 04-56-38](https://github.com/user-attachments/assets/7b0d1497-61d8-4fa3-a9e2-007425c10ba4)
 
 
 **Example-3**
@@ -2310,6 +2317,7 @@ endmodule
 
 
 **Netlist Simulation**
+![Screenshot from 2024-10-22 05-06-28](https://github.com/user-attachments/assets/dd00260e-a88f-484c-8b1a-f057986f73ad)
 
 
 
@@ -2334,14 +2342,24 @@ endmodule
 **Simulation**
 ![Screenshot from 2024-10-21 11-40-12](https://github.com/user-attachments/assets/37ac190b-8405-4f2c-8e9c-57d76fb2a586)
 
-
+Command for synthesis:
+```
+yosys> read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog blocking_caveat.v 
+yosys> synth -top blocking_caveat
+yosys> abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+yosys> write_verilog -noattr blocking_caveat_net.v
+yosys> show
+```
 **Synthesis**
 ![Screenshot from 2024-10-21 11-42-06](https://github.com/user-attachments/assets/f864b87e-be92-4c33-8d81-5c331edcd0cd)
 
 
 **Netlist Simulation**
+![Screenshot from 2024-10-22 05-10-21](https://github.com/user-attachments/assets/536dc995-714a-4d03-9e1b-91dc90a768f9)
 
 **Mismatch**
+![Screenshot from 2024-10-22 05-16-30](https://github.com/user-attachments/assets/5731a764-6a5b-4767-882e-f80ad67837e5)
 
 Here this how the circuit should behave but this correct waveform is only obtained while doing netlist simulation. Here first pic show the netlist simulation which shows the proper working of the dut while the last pic shows the improper working of dut as we have used blocking statement here which causes synthesis simulation mismatch which is sorted out by GLS while providing netlist simulation.
 	
