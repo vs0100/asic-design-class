@@ -1243,7 +1243,7 @@ Here is the output of gtkWave
 <summary>Lab 8</summary>
 
  <details>
- <summary>Day 0 </summary>
+ <summary>DAY 0 </summary>
 
  # Software Installation
 
@@ -1255,9 +1255,9 @@ Here is the output of gtkWave
      cd yosys-master  
      sudo apt install make  
      sudo apt-get install build-essential clang bison flex \ 
-     	libreadline-dev gawk tcl-dev libffi-dev git \ 
-     	graphviz xdot pkg-config python3 libboost-system-dev \ 
-     	libboost-python-dev libboost-filesystem-dev zlib1g-dev 
+     libreadline-dev gawk tcl-dev libffi-dev git \ 
+     graphviz xdot pkg-config python3 libboost-system-dev \ 
+     libboost-python-dev libboost-filesystem-dev zlib1g-dev 
      make  
      sudo make install
 
@@ -1274,8 +1274,6 @@ Here is the output of gtkWave
   </details>
 
 
-
-
   <details>
   <summary>GTKWave</summary>
 	  
@@ -1283,8 +1281,6 @@ Here is the output of gtkWave
 sudo apt-get install gtkwave
 ```
   </details>
-
-
 
 
   <details>
@@ -1740,7 +1736,7 @@ begin
 end
 endmodule
 ```
-Gtkwaave waveform
+Gtkwave waveform
 ![Screenshot from 2024-10-20 21-05-48](https://github.com/user-attachments/assets/16687ebc-ff4d-4ffc-b2c8-be029b9f3604)
 
 Synthesis
@@ -1813,19 +1809,23 @@ The generated netlist is as follows:
 Combinational logic optimization with examples
 Optimising the combinational logic circuit is squeezing the logic to get the most optimized digital design so that the circuit finally is area and power efficient. This is achieved by the synthesis tool using various techniques and gives us the most optimized circuit.
 
-**Techniques for Optimizatin**
--Constant propagation which is Direct optimizxation technique
--Boolean logic optimization using K-map or Quine McKluskey
+**Techniques for Optimization**
+- Constant propagation which is Direct optimization technique
+- Boolean logic optimization using K-map or Quine McKluskey
 
 In the above example, if we considor the trasnsistor level circuit of output Y, it has 6 MOS trasistors and when it comes to invertor, only 2 transistors will be sufficient. This is achieved by making A as contstant and propagating the same to output.
 
 Example for Boolean logic optimization:
 
-Let's consider an example concurrent statement **assign y=a?(b?c:(c?a:0)):(!c)**
+Let's consider an example concurrent statement 
+
+**assign y=a?(b?c:(c?a:0)):(!c)**
 
 The above expression is using a ternary operator which realizes a series of multiplexers, however, when we write the boolean expression at outputs of each mux and simplify them further using boolean reduction techniques, the outout y turns out be just **~(a^c)**
 
-Command to optimize the circuit by yosys is **yosys> opt_clean -purge**
+Command to optimize the circuit by yosys is 
+
+**yosys> opt_clean -purge**
 
 **Example-1**
 
