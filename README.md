@@ -2231,7 +2231,8 @@ endmodule
 ```
 
 **Simulation**
-![Screenshot from 2024-10-21 04-38-36](https://github.com/user-attachments/assets/55a1efcf-a06f-4435-a7dc-fb7563f2c4e5)
+![Screenshot from 2024-10-21 11-19-03](https://github.com/user-attachments/assets/8f265549-d7e9-474b-8cbf-af95f5e5e13c)
+
 
 
 **Synthesis**
@@ -2243,6 +2244,7 @@ endmodule
 
 **Mismatch**
 
+![image](https://github.com/user-attachments/assets/5fcecd22-c6a3-427b-aa89-dd1fb0f068dc)
 
 
 **Example-3**
@@ -2259,9 +2261,12 @@ end
 endmodule
 ```
 **Simulation**
+![image](https://github.com/user-attachments/assets/1d9eec09-51e0-499c-820c-bdce770d1fda)
 
 
 **Synthesis**
+![Screenshot from 2024-10-21 11-38-08](https://github.com/user-attachments/assets/8b4e5dc9-ba53-496f-811d-3632e81890a2)
+
 
 **Netlist Simulation**
 
@@ -2286,9 +2291,12 @@ end
 endmodule
 ```
 **Simulation**
+![Screenshot from 2024-10-21 11-40-12](https://github.com/user-attachments/assets/37ac190b-8405-4f2c-8e9c-57d76fb2a586)
 
 
 **Synthesis**
+![Screenshot from 2024-10-21 11-42-06](https://github.com/user-attachments/assets/f864b87e-be92-4c33-8d81-5c331edcd0cd)
+
 
 **Netlist Simulation**
 
