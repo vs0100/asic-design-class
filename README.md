@@ -2119,7 +2119,8 @@ endmodule
 ```
 **Simulation**
 
-![Screenshot from 2024-10-21 04-12-01](https://github.com/user-attachments/assets/c0878549-3fb4-4679-a3e2-0b78559a4c9b)
+![Screenshot from 2024-10-21 04-18-59](https://github.com/user-attachments/assets/9c303214-4c15-4820-a320-af923eadfe3d)
+
 
 **Synthesis**
 ![Screenshot from 2024-10-21 04-20-30](https://github.com/user-attachments/assets/6c1789f3-c241-454b-90dc-dd37fb409f23)
@@ -2150,10 +2151,12 @@ endmodule
 
 ```
 **Synthesis**
-![Screenshot from 2024-10-21 04-19-55](https://github.com/user-attachments/assets/f747f79f-cb71-4f8e-b88f-6ce63939ff84)
+![Screenshot from 2024-10-21 04-24-44](https://github.com/user-attachments/assets/fb0cae6c-3ad1-4645-a66c-c8b88eb2b275)
 
 
-![Screenshot from 2024-10-21 04-19-55](https://github.com/user-attachments/assets/835759e8-2330-4627-b3ce-83f330bbe23a)
+
+![Screenshot from 2024-10-21 04-24-11](https://github.com/user-attachments/assets/a90c8bc4-d243-45df-aa62-dd4b89b3e584)
+
 
 
 
@@ -2174,7 +2177,9 @@ endmodule
 
 **Synthesis**
 
+![Screenshot from 2024-10-22 03-26-59](https://github.com/user-attachments/assets/ef88eb77-734f-4021-bf4e-0326a05a4cb7)
 
+![Screenshot from 2024-10-22 03-28-41](https://github.com/user-attachments/assets/7288aa8d-30ac-4b2a-8a1a-d88196941f1b)
 
 
 
@@ -2188,11 +2193,36 @@ endmodule
 
 <details>
 <summary >DAY 4</summary> 
-GLS,blocking vs non-blocking and Synthesis-Simulation mismatch
+	
+## GLS,blocking vs non-blocking and Synthesis-Simulation mismatch ##
+
 <details>
 	<summary>GLS, Synthesis-Simulation mismatch and Blocking, Non-blocking statements</summary>
+	
+GLS Concepts And Flow Using Iverilog  
+In GLS, we run test bench with netlist as the Design under test instead of the RTL code. Basically, Netlist is logically equal to RTL code as the netlist is obtained by converting RTL code into standard cell gates.
+We will use GLS to verify the logical correctness of design after synthesis and also to ensure the timing of the design is met. (run with delay annotations.)
 
- 
+![image](https://github.com/user-attachments/assets/f5231cdd-fbda-4aa2-9400-617582861a72)
+
+### Synthesis Simulation Mismatch ###
+There are three main reasons for Synthesis Simulation Mismatch:  
+
+* Missing sensitivity list in always block  
+* Blocking vs Non-Blocking Assignments  
+* Non standard Verilog coding  
+
+### Missing sensitivity list in always block: ###
+If the consider - Example-2, we can see the only sel is mentioned in the sensitivity list. During the simulation, the waveforms will resemble a latched output but the simulation of netlist will not infer this as the synthesizer will only look at the statements with in the procedural block and not the sensitivity list.
+
+As the synthesizer doen't look for sensitivity list and it looks only for the statements in procedural block, it infers correct circuit and if we simulate the netlist code, there will be a synthesis simulation mismatch.
+
+To avoid the synthesis and simulation mismatch. It is very important to check the behaviour of the circuit first and then match it with the expected output seen in simulation and make sure there are no synthesis and simulation mismatches. This is why we use GLS.
+
+### Blocking vs Non-Blocking Assignments: ###
+
+Blocking statements execute the statemetns in the order they are written inside the always block. Non-Blocking statements execute all the RHS and once always block is entered, the values are assigned to LHS. This will give mismatch as sometimes, improper use of blocking statements can create latches. Get to see at Example4
+
 </details>
 <details>
 	<summary>Lab- GLS Synth Sim Mismatch</summary>	
@@ -2213,7 +2243,13 @@ endmodule
 
 
 **Netlist Simulation**
-
+Commands for netlist simulation
+```
+iverilog ../my_lib/verilog_module/primitives.v ../my_lib/verilog_module/sky130_fd_sc_hd.v ternary_operator_mux_net.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+![Screenshot from 2024-10-22 03-54-48](https://github.com/user-attachments/assets/aa66d115-6852-4e52-8887-bc02163d232f)
 
 
 **Example-2**
@@ -2240,6 +2276,11 @@ endmodule
 
 **Netlist Simulation**
 
+```
+iverilog ../my_lib/verilog_module/primitives.v ../my_lib/verilog_module/sky130_fd_sc_hd.v bad_mux_net.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+```
 
 
 **Mismatch**
