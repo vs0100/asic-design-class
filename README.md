@@ -1804,19 +1804,499 @@ The generated netlist is as follows:
 
 
 
-
 </details>
 </details>
 
 
 <details>
 <summary >DAY 3</summary>
+Combinational logic optimization with examples
+Optimising the combinational logic circuit is squeezing the logic to get the most optimized digital design so that the circuit finally is area and power efficient. This is achieved by the synthesis tool using various techniques and gives us the most optimized circuit.
 
+**Techniques for Optimizatin**
+-Constant propagation which is Direct optimizxation technique
+-Boolean logic optimization using K-map or Quine McKluskey
+
+In the above example, if we considor the trasnsistor level circuit of output Y, it has 6 MOS trasistors and when it comes to invertor, only 2 transistors will be sufficient. This is achieved by making A as contstant and propagating the same to output.
+
+Example for Boolean logic optimization:
+
+Let's consider an example concurrent statement **assign y=a?(b?c:(c?a:0)):(!c)**
+
+The above expression is using a ternary operator which realizes a series of multiplexers, however, when we write the boolean expression at outputs of each mux and simplify them further using boolean reduction techniques, the outout y turns out be just **~(a^c)**
+
+Command to optimize the circuit by yosys is **yosys> opt_clean -purge**
+
+**Example-1**
+
+```
+module opt_check (input a , input b , output y);
+	assign y = a?b:0;
+endmodule
+```
+**Optimized Circuit**
+
+![Screenshot from 2024-10-21 03-03-48](https://github.com/user-attachments/assets/93944613-a047-4d5e-91ea-ccf26e8b198f)
+
+
+
+**Example-2**
+```
+module opt_check2 (input a , input b , output y);
+	assign y = a?1:b;
+endmodule
+```
+**Optimized Circuit**
+![Screenshot from 2024-10-21 03-07-18](https://github.com/user-attachments/assets/15cb90fe-43f2-483c-8114-5d7371b31128)
+
+
+
+**Example-3**
+```
+module opt_check3 (input a , input b, input c , output y);
+	assign y = a?(c?b:0):0;
+endmodule
+```
+
+**Optimized Circuitt**
+![Screenshot from 2024-10-21 03-07-18](https://github.com/user-attachments/assets/3e4769c6-41ab-404d-b594-04a400fcdd60)
+
+
+
+**Example-4**
+
+
+```
+module opt_check4 (input a , input b , input c , output y);
+	assign y = a?(b?(a & c ):c):(!c);
+endmodule
+```
+
+**Optimized Circuit**
+![Screenshot from 2024-10-21 03-16-17](https://github.com/user-attachments/assets/8175d344-0205-42e5-b7d7-75939cd02686)
+
+
+**Example-5**
+```
+module sub_module(input a , input b , output y);
+	assign y = a & b;
+endmodule
+
+module multiple_module_opt2(input a , input b , input c , input d , output y);
+	wire n1,n2,n3;
+	sub_module U1 (.a(a) , .b(1'b0) , .y(n1));
+	sub_module U2 (.a(b), .b(c) , .y(n2));
+	sub_module U3 (.a(n2), .b(d) , .y(n3));
+	sub_module U4 (.a(n3), .b(n1) , .y(y));
+endmodule
+
+```
+Here there is multiple modules present so we will try to check whether those module are being used or not by using following commands:
+
+```
+yosys:read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys:read_verilog multiple_module_opt2.v
+yosys:synth -top multiple_module_opt2
+yosys:abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys:flatten
+yosys:opt_clean -purge
+yosys:show
+
+```
+
+**Before Flatten**
+
+![Screenshot from 2024-10-21 03-22-52](https://github.com/user-attachments/assets/028266f9-dcda-4f37-9264-138f69ecaf68)
+
+
+
+
+
+
+**After Flatten**
+![Screenshot from 2024-10-21 03-24-54](https://github.com/user-attachments/assets/08509587-5ffa-41a2-826a-5e61428d68c2)
+
+
+
+
+
+
+**Example-6**
+```
+module sub_module1(input a , input b , output y);
+assign y = a & b;
+endmodule
+
+module sub_module2(input a , input b , output y);
+assign y = a^b;
+endmodule
+
+module multiple_module_opt(input a , input b , input c , input d , output y);
+wire n1,n2,n3;
+sub_module1 U1 (.a(a) , .b(1'b1) , .y(n1));
+sub_module2 U2 (.a(n1), .b(1'b0) , .y(n2));
+sub_module2 U3 (.a(b), .b(d) , .y(n3));
+
+assign y = c | (b & n1); 
+endmodule
+
+```
+
+**Before Flatten**
+
+![Screenshot from 2024-10-21 03-30-18](https://github.com/user-attachments/assets/58454364-5677-4d17-92ab-a97406d4ed4e)
+
+
+
+
+**After Flatten**
+
+![Screenshot from 2024-10-21 03-31-11](https://github.com/user-attachments/assets/ca1b9c2b-922b-482f-8831-3de810915377)
+
+
+
+
+</details>
+
+<details>
+	<summary>Sequential Logic Optimization with examples</summary>
+Below are the various techniques used for sequential logic optimisations:
+	-Basic
+		Sequential contant propagation
+	-Advanced
+		-State optimisation
+		-Retiming
+		-Sequential Logic Cloning (Floor Plan Aware Synthesis)	
+
+**Basic**
+
+Sequential Constant Propagation
+Here only the first logic can be optimized as the output of flop is always zero. However for the second flop, the output changes continuously, therefor it cannot be used for contant propagation.
+
+**Advanced**
+State Optimisation: This is optimisation of unused state. Using this technique we can come up with most optimised state machine.
+
+Cloning: This is done when performing PHYSICAL AWARE SYNTHESIS. Lets consider a flop A which is connected to flop B and flop C through a combination logic. If B and C are placed far from A in the flooerplan, there is a routing path delay. To avoid this, we connect A to two intermediate flops and then from these flops the output is sent to B and C thereby decreasing the delay. This process is called cloning since we are generating two new flops with same functionality as A.
+
+Retiming: Retiming is a powerful sequential optimization technique used to move registers across the combinational logic or to optimize the number of registers to improve performance via power-delay trade-off, without changing the input-output behavior of the circuit.
+
+**Example-1**
+Here flop will be inferred as the output is not constant.
+```
+module dff_const1(input clk, input reset, output reg q);
+	always @(posedge clk, posedge reset)
+	begin
+		if(reset)
+			q <= 1'b0;
+		else
+			q <= 1'b1;
+	end
+endmodule
+
+```
+
+**Simulation**
+
+![Screenshot from 2024-10-21 03-46-57](https://github.com/user-attachments/assets/489922f7-9d20-48df-9f03-83db6e49f34c)
+
+
+**Synthesis**
+
+![Screenshot from 2024-10-21 03-51-50](https://github.com/user-attachments/assets/d7734090-6481-4021-a3dc-41fd64e63aef)
+
+![Screenshot from 2024-10-21 03-53-14](https://github.com/user-attachments/assets/34599beb-2252-4a0b-bc4b-3fc672bbbe0d)
+
+
+
+**Example-2**
+Here flop will not be inferred as the output is always high.
+```
+module dff_const2(input clk, input reset, output reg q);
+	always @(posedge clk, posedge reset)
+	begin
+		if(reset)
+			q <= 1'b1;
+		else
+			q <= 1'b1;
+	end
+endmodule
+
+```
+**Simulation**
+![Screenshot from 2024-10-21 03-44-13](https://github.com/user-attachments/assets/c9da5de0-f3f9-403d-ba17-6dc6933b9c95)
+
+
+**Synthesis**
+![Screenshot from 2024-10-21 03-56-40](https://github.com/user-attachments/assets/849c995c-24b2-41c8-b16b-088a9003b33d)
+
+![Screenshot from 2024-10-21 03-58-35](https://github.com/user-attachments/assets/d8c6ba5d-5016-4d00-9631-01bb9189721f)
+
+
+
+
+**Example-3**
+
+```
+module dff_const3(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+endmodule
+
+```
+**Simulation**
+![Screenshot from 2024-10-21 04-02-07](https://github.com/user-attachments/assets/48a32326-0a68-418c-a70a-cbd0ea9ec4b9)
+
+
+**Synthesis**
+![Screenshot from 2024-10-21 04-04-28](https://github.com/user-attachments/assets/b3395476-34ea-4353-8146-20a41b09c3f5)
+
+
+
+**Example-4**
+
+```
+module dff_const4(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b1;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+endmodule
+
+```
+**Synthesis**
+![Screenshot from 2024-10-21 04-08-35](https://github.com/user-attachments/assets/515619a8-1ea1-4bea-9889-380cbecbe638)
+
+
+**Simulatiom**
+![Screenshot from 2024-10-21 04-10-36](https://github.com/user-attachments/assets/89ff9812-d353-490b-862b-08636fb2f4b9)
+
+![Screenshot from 2024-10-21 04-12-01](https://github.com/user-attachments/assets/867080a8-1840-4762-a3f4-8cd21ef3a64b)
+
+
+**Example-5**
+
+```
+module dff_const5(input clk, input reset, output reg q);
+reg q1;
+always @(posedge clk, posedge reset)
+	begin
+	if(reset)
+	begin
+		q <= 1'b0;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+endmodule
+```
+**Simulation**
+
+![Screenshot from 2024-10-21 04-12-01](https://github.com/user-attachments/assets/c0878549-3fb4-4679-a3e2-0b78559a4c9b)
+
+**Synthesis**
+![Screenshot from 2024-10-21 04-20-30](https://github.com/user-attachments/assets/6c1789f3-c241-454b-90dc-dd37fb409f23)
+
+![Screenshot from 2024-10-21 04-19-55](https://github.com/user-attachments/assets/1206d235-b64d-4358-99d0-9e638187506f)
+
+
+
+
+<details>
+	<summary>
+		Sequential optimisation of unused outputs
+	</summary>
+
+**Example-1**
+```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count[0];
+always @(posedge clk ,posedge reset)
+begin
+if(reset)
+	count <= 3'b000;
+else
+	count <= count + 1;
+end
+endmodule
+
+```
+**Synthesis**
+![Screenshot from 2024-10-21 04-19-55](https://github.com/user-attachments/assets/f747f79f-cb71-4f8e-b88f-6ce63939ff84)
+
+
+![Screenshot from 2024-10-21 04-19-55](https://github.com/user-attachments/assets/835759e8-2330-4627-b3ce-83f330bbe23a)
+
+
+
+Updated Counter Logic
+```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = {count[2:0]==3'b100};
+always @(posedge clk ,posedge reset)
+begin
+if(reset)
+	count <= 3'b000;
+else
+	count <= count + 1;
+end
+endmodule
+```
+
+**Synthesis**
+
+
+
+
+
+
+</details>
+
+
+</details>
 </details>
 
 
 <details>
 <summary >DAY 4</summary> 
+GLS,blocking vs non-blocking and Synthesis-Simulation mismatch
+<details>
+	<summary>GLS, Synthesis-Simulation mismatch and Blocking, Non-blocking statements</summary>
+
+ 
+</details>
+<details>
+	<summary>Lab- GLS Synth Sim Mismatch</summary>	
+	
+**Example-1**
+	
+```
+module ternary_operator_mux (input i0 , input i1 , input sel , output y);
+	assign y = sel?i1:i0;
+endmodule
+```
+**Simulation**
+![Screenshot from 2024-10-21 04-35-51](https://github.com/user-attachments/assets/92efb6c5-1a07-49d5-9721-cce53ab8ceb1)
+
+
+**Synthesis**
+![Screenshot from 2024-10-21 04-38-36](https://github.com/user-attachments/assets/01a51789-3671-4cc9-adae-d56bf8cce778)
+
+
+**Netlist Simulation**
+
+
+
+**Example-2**
+
+```
+module bad_mux (input i0 , input i1 , input sel , output reg y);
+always @ (sel)
+begin
+if(sel)
+	y <= i1;
+else 
+	y <= i0;
+end
+endmodule
+```
+
+**Simulation**
+![Screenshot from 2024-10-21 04-38-36](https://github.com/user-attachments/assets/55a1efcf-a06f-4435-a7dc-fb7563f2c4e5)
+
+
+**Synthesis**
+
+
+**Netlist Simulation**
+
+
+
+**Mismatch**
+
+
+
+**Example-3**
+
+```
+module good_mux (input i0 , input i1 , input sel , output reg y);
+always @ (*)
+begin
+if(sel)
+	y <= i1;
+else 
+	y <= i0;
+end
+endmodule
+```
+**Simulation**
+
+
+**Synthesis**
+
+**Netlist Simulation**
+
+
+
+</details>
+<details>
+	<summmary>
+		Lab- Synthesis simulation mismatch blocking statement
+	</summmary>
+ Here the output is depending on the past value of x which is dependednt on a and b and it appears like a flop.
+
+**Example-4**
+```
+module blocking_caveat (input a , input b , input  c, output reg d); 
+reg x;
+always @ (*)
+	begin
+	d = x & c;
+	x = a | b;
+end
+endmodule
+```
+**Simulation**
+
+
+**Synthesis**
+
+**Netlist Simulation**
+
+**Mismatch**
+
+Here this how the circuit should behave but this correct waveform is only obtained while doing netlist simulation. Here first pic show the netlist simulation which shows the proper working of the dut while the last pic shows the improper working of dut as we have used blocking statement here which causes synthesis simulation mismatch which is sorted out by GLS while providing netlist simulation.
+	
+</details>
 
 </details>
 
