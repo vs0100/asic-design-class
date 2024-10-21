@@ -1956,7 +1956,7 @@ endmodule
 
 
 
-</details>
+
 
 <details>
 	<summary>Sequential Logic Optimization with examples</summary>
@@ -2181,9 +2181,9 @@ endmodule
 
 </details>
 
+</details>
+</details>
 
-</details>
-</details>
 
 
 <details>
