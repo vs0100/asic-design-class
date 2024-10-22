@@ -1372,7 +1372,7 @@ docker run hello-world
 ## Introduction to Verilog RTL design and Synthesis ##  	
 
 <details>
-	<summary>Introduction to Verilog RTL design and Synthesis</summary>
+	<summary>Introduction to Verilog RTL design and Synthesis</summary><br>
 	
 
 
@@ -1519,8 +1519,10 @@ The below image shows the netlist file:
 
 <details>
 <summary >DAY 2</summary> 
-<details>
-<summary>Timing Libs, hierarchial, flat synthesis, efficient flop coding styles</summary>
+	
+## Timing Libs, hierarchial, flat synthesis, efficient flop coding stylesm ##
+
+
 <details>
 <summary>Introduction to timing .libs</summary>
 	
@@ -1809,7 +1811,7 @@ The generated netlist is as follows:
 
 
 </details>
-</details>
+
 
 
 <details>
