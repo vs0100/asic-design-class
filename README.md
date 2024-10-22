@@ -1251,15 +1251,15 @@ Here is the output of gtkWave
   <summary>Yosys</summary>
 
 ```
-     git clone https://github.com/YosysHQ/yosys.git 
-     cd yosys-master  
-     sudo apt install make  
-     sudo apt-get install build-essential clang bison flex \ 
-     	libreadline-dev gawk tcl-dev libffi-dev git \ 
-     	graphviz xdot pkg-config python3 libboost-system-dev \ 
-     	libboost-python-dev libboost-filesystem-dev zlib1g-dev 
-     make  
-     sudo make install
+git clone https://github.com/YosysHQ/yosys.git 
+cd yosys-master  
+sudo apt install make  
+sudo apt-get install build-essential clang bison flex \ 
+libreadline-dev gawk tcl-dev libffi-dev git \ 
+graphviz xdot pkg-config python3 libboost-system-dev \ 
+libboost-python-dev libboost-filesystem-dev zlib1g-dev 
+make  
+sudo make install
 
   ``` 
   </details>
@@ -1268,7 +1268,7 @@ Here is the output of gtkWave
   <summary>Iverilog</summary>
 	  
   ```
-	sudo apt-get install iverilog
+sudo apt-get install iverilog
   ```
 
   </details>
@@ -1369,10 +1369,14 @@ docker run hello-world
 <details>
 <summary>DAY1</summary>
 	
+## Introduction to Verilog RTL design and Synthesis ##  	
 
 <details>
 	<summary>Introduction to Verilog RTL design and Synthesis</summary>
 	
+
+
+
 **RTL** Design - 
 Register transfer level design, or RTL design, is a technique that allows us to move data across registers. In RTL design, we use HDL (Hardware Description Language) programs like Verilog or VerilogHDL to write code for both sequential and combinational circuits. These programs may simulate both hardware and logical functions. An RTL design can consist of a single Verilog code or several. A crucial point to remember is that RTL designs must be written with efficient and synthesizable (physical gate-realizable) code.   
 **Testbench** -
@@ -1811,11 +1815,11 @@ The generated netlist is as follows:
 <details>
 <summary >DAY 3</summary>
 	
-## Combinational and Sequential Optimizations##
+## Combinational and Sequential Optimizations ##
 
 Optimising the combinational logic circuit is squeezing the logic to get the most optimized digital design so that the circuit finally is area and power efficient. This is achieved by the synthesis tool using various techniques and gives us the most optimized circuit.
 
-**Techniques for Optimizatin**
+**Techniques for Optimization**
 * Constant propagation which is Direct optimizxation technique
 * Boolean logic optimization using K-map or Quine McKluskey
 
