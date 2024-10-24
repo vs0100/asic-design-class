@@ -2420,11 +2420,18 @@ gtkwave pre_synth_sim.vcd
 
 
 Output waveforms for post_synth_sim:
-![Screenshot from 2024-10-24 08-32-47](https://github.com/user-attachments/assets/114b3793-ca2f-4af5-bc62-95533fec2440)
+![Screenshot from 2024-10-25 00-59-17](https://github.com/user-attachments/assets/19926dbb-4b57-4162-9f1f-49c993dfb1ba)
+
+![Screenshot from 2024-10-25 00-59-33](https://github.com/user-attachments/assets/405a736d-27f0-4e50-992d-cf978a804bc5)
 
 Comparison Output waveforms:
-![Screenshot from 2024-10-24 08-22-52](https://github.com/user-attachments/assets/19c7cd2d-adc3-4b10-953f-f93836b8466b)
+pre_synth:  
+![Screenshot from 2024-10-25 01-08-39](https://github.com/user-attachments/assets/af0c13b0-1460-44a5-a0e7-8ef744370172)
 
-![Screenshot from 2024-10-24 08-39-56](https://github.com/user-attachments/assets/b3cb5738-5aee-4064-a8ed-6f76c8b92680)
+post_synth:  
+![Screenshot from 2024-10-24 23-53-54](https://github.com/user-attachments/assets/a191ae1d-603b-42dd-b39b-b88bae0c4aa9)
+
+
+
 
 </details>
