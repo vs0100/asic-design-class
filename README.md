@@ -2380,3 +2380,51 @@ Here this how the circuit should behave but this correct waveform is only obtain
 
 
 </details>
+
+<details> 
+	<summary>Lab-9</summary>
+
+# Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave #
+
+### Generating GLS using yosys ###
+
+For synthesis use the following commands
+
+```
+read liberty - lib src/lib/sky130_fd schd tt 025C 1v80. lib
+read_verilog -I src/include/-I src/module/ src/module/rvmyth.v src/module/clk_gate.v src/module/vsdbabysoc.v
+synth - top rvmyth
+abc - liberty src/lib/sky130_fd_sc_hd_tt_025C_Iv80. lib
+dfflibmap - liberty src/lib/sky130_fd_schd tt_ 025C_1v80. lib
+write_verilog -noattr rvmyth_net.v
+
+```
+These commands will generate the vsdbaby soc top level netlist file called as rvmyth_net.v
+
+### Post-Synthesis Simulation ###
+
+```
+iverilog -o output/post_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include/ -I src/module/
+cd output
+./post_synth_sim.out
+gtkwave pre_synth_sim.vcd
+```
+
+For getting the pre synthesized simulation output again you can follow below given steps
+
+```
+iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
+./pre_synth_sim.out
+gtkwave pre_synth_sim.vcd
+```
+
+
+Output waveforms for post_synth_sim:
+![Screenshot from 2024-10-24 08-32-47](https://github.com/user-attachments/assets/114b3793-ca2f-4af5-bc62-95533fec2440)
+
+Comparison Output waveforms:
+![Screenshot from 2024-10-24 08-22-52](https://github.com/user-attachments/assets/19c7cd2d-adc3-4b10-953f-f93836b8466b)
+
+![Screenshot from 2024-10-24 08-39-56](https://github.com/user-attachments/assets/b3cb5738-5aee-4064-a8ed-6f76c8b92680)
+
+</details>
