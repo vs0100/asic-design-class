@@ -2404,7 +2404,7 @@ These commands will generate the vsdbaby soc top level netlist file called as rv
 ### Post-Synthesis Simulation ###
 
 ```
-iverilog -o output/post_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include/ -I src/module/
+iverilog -o output/post_synth_sim.out -DPOST_SYNTH_SIM src/module/testbench.v -I src/include/ -I src/module/
 cd output
 ./post_synth_sim.out
 gtkwave pre_synth_sim.vcd
