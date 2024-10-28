@@ -2480,10 +2480,12 @@ Setup uncertainty and clock transition will be 5% of clock
 Hold uncertainty and data transition will be 8% of clock.
 
 
-
+```
 cd /home/vaishnavi/OpenSTA/app
 ./sta
+```
 
+```
 read_liberty /home/vaishnavi/OpenSTA/lab10/sky130_fd_sc_hd__tt_025C_1v80.lib
 read_verilog /home/vaishnavi/OpenSTA/lab10/likith_riscv_netlist.v
 link_design rvmyth
@@ -2495,7 +2497,7 @@ set_clock_transition [expr 0.05 * 10.45] [get_clocks clk]
 set_input_transition [expr 0.08 * 10.45] [all_inputs]
 
 report_checks -path_delay max
-report_checks -path_delay min```
+report_checks -path_delay min
 
 ```
 
