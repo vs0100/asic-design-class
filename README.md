@@ -2435,3 +2435,73 @@ post_synth:
 
 
 </details>
+
+<details>
+<summary>Lab 10</summary>
+	
+# Static Timing Analysis for a Synthesized RISC-V Core with OpenSTA
+
+Download CUDD and move file to home directory.
+
+
+```
+cd
+tar xvfz cudd-3.0.0.tar.gz
+cd cudd-3.0.0
+./configure
+make
+```
+
+Download OpenSTA
+
+```
+cd
+sudo apt-get install cmake clang gcc tcl swig bison flex
+git clone https://github.com/parallaxsw/OpenSTA.git
+cd OpenSTA
+cmake -DCUDD_DIR=/home/vaishnavi/cudd-3.0.0
+make
+app/sta
+```
+![Screenshot from 2024-10-28 21-59-51](https://github.com/user-attachments/assets/eb5d7fd5-9b5f-442c-8ab7-2af464233831)
+
+
+
+```
+cd /home/vaishnavi/OpenSTA
+mkdir lab10
+```
+
+## Steps to do timming analysis:
+
+
+Clock period = 10.45ns
+Setup uncertainty and clock transition will be 5% of clock
+Hold uncertainty and data transition will be 8% of clock.
+
+
+
+cd /home/vaishnavi/OpenSTA/app
+./sta
+
+read_liberty /home/vaishnavi/OpenSTA/lab10/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog /home/vaishnavi/OpenSTA/lab10/likith_riscv_netlist.v
+link_design rvmyth
+
+create_clock -name clk -period 9.45 [get_ports clk]
+set_clock_uncertainty [expr 0.05 * 10.45] -setup [get_clocks clk]
+set_clock_uncertainty [expr 0.08 * 10.45] -hold [get_clocks clk]
+set_clock_transition [expr 0.05 * 10.45] [get_clocks clk]
+set_input_transition [expr 0.08 * 10.45] [all_inputs]
+
+report_checks -path_delay max
+report_checks -path_delay min```
+
+```
+
+![Screenshot from 2024-10-28 22-05-24](https://github.com/user-attachments/assets/3c0591e7-5d17-4839-b11e-eedbcd4712cd)
+
+![Screenshot from 2024-10-28 22-05-33](https://github.com/user-attachments/assets/2fcc914e-592e-4eaf-89c3-afd1e98cedd7)
+
+
+</details>
