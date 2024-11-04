@@ -2638,16 +2638,20 @@ report_wns -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_wns.txt
 | sky130_fd_sc_hd__ss_n40C_1v76.lib | -540.3677    | -5.4044     | -5.4044         | -0.2522         |
 
 
-![3](https://github.com/user-attachments/assets/bbab0804-290b-49cc-aa8f-aff4e0421afb)
+![TNS](https://github.com/user-attachments/assets/9cd1e609-4957-40fd-a79a-288c6a69b297)
 
 
-![2](https://github.com/user-attachments/assets/2f27c598-3e35-432c-bb1c-b976b9555005)
+
+![WNS](https://github.com/user-attachments/assets/a230922f-960d-4659-bc1b-ec1fd0b40cc4)
 
 
-![1](https://github.com/user-attachments/assets/60622a52-adc5-450f-b291-53f7a6ca8110)
+
+![max_slack](https://github.com/user-attachments/assets/ba7918bb-a49e-4621-b2ab-4d9fc8db46c0)
 
 
-![4](https://github.com/user-attachments/assets/538dfd34-f811-4564-9657-e368e0d32159)
+
+![min_slack](https://github.com/user-attachments/assets/36f45d9b-4a03-4cd5-b37e-2afa7cfd2ab4)
+
 
 
 
