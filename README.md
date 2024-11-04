@@ -2507,3 +2507,150 @@ report_checks -path_delay min
 
 
 </details>
+
+
+
+<details>
+<summary>Lab 11</summary>
+
+# Static Timing Analysis of Synthesized RISC-V core using different PVT Corner Library Files on OpenSTA
+
+In this lab, we will be checking for the worst setup/hold slacks using different PVT Corner library files.
+
+To ensure our design functions correctly across all PVT corners, we perform Static Timing Analysis (STA) using the script below. This script sequentially reads all library files from the specified directory and applies them to the VSDBabySoC design. It also includes constraints from the previous lab: a clock period of 10.45 ns, with clock uncertainty and data transition delays set to 5% for setup and 8% for hold.
+
+
+SDC file
+
+```
+# Create clock with new period
+create_clock [get_pins pll/CLK] -name clk -period 10.45 -waveform {0 4.725}
+
+# Set loads
+set_load -pin_load 0.5 [get_ports OUT]
+set_load -min -pin_load 0.5 [get_ports OUT]
+
+# Set clock latency
+set_clock_latency 1 [get_clocks clk]
+set_clock_latency -source 2 [get_clocks clk]
+
+# Set clock uncertainty
+set_clock_uncertainty 0.4725 [get_clocks clk]  ; # 5% of clock period for setup
+set_clock_uncertainty -hold 0.756 [get_clocks clk] ; # 8% of clock period for hold
+
+# Set maximum delay
+set_max_delay 9.45 -from [get_pins dac/OUT] -to [get_ports OUT]
+
+# Set input delay for VCO_IN
+set_input_delay -clock clk -max 4 [get_ports VCO_IN]
+set_input_delay -clock clk -min 1 [get_ports VCO_IN]
+
+# Set input delay for ENb_VCO
+set_input_delay -clock clk -max 4 [get_ports ENb_VCO]
+set_input_delay -clock clk -min 1 [get_ports ENb_VCO]
+
+# Set input delay for ENb_CP
+set_input_delay -clock clk -max 4 [get_ports ENb_CP]
+set_input_delay -clock clk -min 1 [get_ports ENb_CP]
+
+# Set input transition for VCO_IN
+set_input_transition -max 0.4725 [get_ports VCO_IN] ; # 5% of clock
+set_input_transition -min 0.756 [get_ports VCO_IN] ; # adjust if needed
+
+# Set input transition for ENb_VCO
+set_input_transition -max 0.4725 [get_ports ENb_VCO] ; # 5% of clock
+set_input_transition -min 0.756 [get_ports ENb_VCO] ; # adjust if needed
+
+# Set input transition for ENb_CP
+set_input_transition -max 0.4725 [get_ports ENb_CP] ; # 5% of clock
+set_input_transition -min 0.756 [get_ports ENb_CP] ; # adjust if needed
+```
+
+TCL script
+
+```
+set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
+set list_of_lib_files(2) "sky130_fd_sc_hd__tt_100C_1v80.lib"
+set list_of_lib_files(3) "sky130_fd_sc_hd__ff_100C_1v65.lib"
+set list_of_lib_files(4) "sky130_fd_sc_hd__ff_100C_1v95.lib"
+set list_of_lib_files(5) "sky130_fd_sc_hd__ff_n40C_1v56.lib"
+set list_of_lib_files(6) "sky130_fd_sc_hd__ff_n40C_1v65.lib"
+set list_of_lib_files(7) "sky130_fd_sc_hd__ff_n40C_1v76.lib"
+set list_of_lib_files(8) "sky130_fd_sc_hd__ff_n40C_1v95.lib"
+set list_of_lib_files(9) "sky130_fd_sc_hd__ss_100C_1v40.lib"
+set list_of_lib_files(10) "sky130_fd_sc_hd__ss_100C_1v60.lib"
+set list_of_lib_files(11) "sky130_fd_sc_hd__ss_n40C_1v28.lib"
+set list_of_lib_files(12) "sky130_fd_sc_hd__ss_n40C_1v35.lib"
+set list_of_lib_files(13) "sky130_fd_sc_hd__ss_n40C_1v40.lib"
+set list_of_lib_files(14) "sky130_fd_sc_hd__ss_n40C_1v44.lib"
+set list_of_lib_files(15) "sky130_fd_sc_hd__ss_n40C_1v60.lib"
+set list_of_lib_files(16) "sky130_fd_sc_hd__ss_n40C_1v76.lib"
+
+for {set i 1} {$i <= [array size list_of_lib_files]} {incr i} {
+read_liberty /home/vaishnavi/OpenSTA/lab11/lib/$list_of_lib_files($i)
+read_liberty -min /home/vaishnavi/OpenSTA/lab11/lib/avsdpll.lib
+read_liberty -max /home/vaishnavi/OpenSTA/lab11/lib/avsdpll.lib
+read_liberty -min /home/vaishnavi/OpenSTA/lab11/lib/avsddac.lib
+read_liberty -max /home/vaishnavi/OpenSTA/lab11/lib/avsddac.lib
+read_verilog  /home/vaishnavi/OpenSTA/lab11/vsdbabysoc_synth.v
+link_design vsdbabysoc
+read_sdc /home/vaishnavi/OpenSTA/lab11/vsdbabysoc_synthesis.sdc
+check_setup -verbose
+report_checks -path_delay min_max -fields {nets cap slew input_pins fanout} -digits {4} > /home/vaishnavi/OpenSTA/lab11/output/min_max_$list_of_lib_files($i).txt
+
+exec echo "$list_of_lib_files($i)" >> /home/vaishnavi/OpenSTA/lab11/output/sta_worst_max_slack.txt
+report_worst_slack -max -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_worst_max_slack.txt
+
+exec echo "$list_of_lib_files($i)" >> /home/vaishnavi/OpenSTA/lab11/output/sta_worst_min_slack.txt
+report_worst_slack -min -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_worst_min_slack.txt
+
+exec echo "$list_of_lib_files($i)" >> /home/vaishnavi/OpenSTA/lab11/output/sta_tns.txt
+report_tns -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_tns.txt
+
+exec echo "$list_of_lib_files($i)" >> /home/vaishnavi/OpenSTA/lab11/output/sta_wns.txt
+report_wns -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_wns.txt
+}
+
+```
+
+![Screenshot from 2024-11-05 02-04-00](https://github.com/user-attachments/assets/0bf9fc9e-f841-4972-872f-c1f747f98b96)
+
+
+
+
+| Library                           | TNS          | WNS         | Worst Max Slack | Worst Min Slack |
+|-----------------------------------|--------------|-------------|-----------------|-----------------|
+| sky130_fd_sc_hd__tt_025C_1v80.lib | 0            | 0           | 0.9167          | -0.4464         |
+| sky130_fd_sc_hd__tt_100C_1v80.lib | 0            | 0           | 1.071           | -0.4415         |
+| sky130_fd_sc_hd__ff_100C_1v65.lib | 0            | 0           | 3.032           | -0.5069         |
+| sky130_fd_sc_hd__ff_100C_1v95.lib | 0            | 0           | 4.5443          | -0.56           |
+| sky130_fd_sc_hd__ff_n40C_1v56.lib | 0            | 0           | 1.2556          | -0.4645         |
+| sky130_fd_sc_hd__ff_n40C_1v65.lib | 0            | 0           | 2.3887          | -0.5009         |
+| sky130_fd_sc_hd__ff_n40C_1v76.lib | 0            | 0           | 3.4076          | -0.5317         |
+| sky130_fd_sc_hd__ff_n40C_1v95.lib | 0            | 0           | 4.5694          | -0.5685         |
+| sky130_fd_sc_hd__ss_100C_1v40.lib | -2936.061    | -18.1441    | -18.1441        | 0.1493          |
+| sky130_fd_sc_hd__ss_100C_1v60.lib | -1112.7665   | -8.8965     | -8.8965         | -0.114          |
+| sky130_fd_sc_hd__ss_n40C_1v28.lib | -14553.7061  | -63.5857    | -63.5857        | 1.0736          |
+| sky130_fd_sc_hd__ss_n40C_1v35.lib | -8539.6611   | -40.7195    | -40.7195        | 0.5915          |
+| sky130_fd_sc_hd__ss_n40C_1v40.lib | -5958.698    | -30.7162    | -30.7162        | 0.3689          |
+| sky130_fd_sc_hd__ss_n40C_1v44.lib | -4536.4106   | -24.9304    | -24.9304        | 0.2349          |
+| sky130_fd_sc_hd__ss_n40C_1v60.lib | -1608.6375   | -11.6315    | -11.6315        | -0.0932         |
+| sky130_fd_sc_hd__ss_n40C_1v76.lib | -540.3677    | -5.4044     | -5.4044         | -0.2522         |
+
+
+![3](https://github.com/user-attachments/assets/bbab0804-290b-49cc-aa8f-aff4e0421afb)
+
+
+![2](https://github.com/user-attachments/assets/2f27c598-3e35-432c-bb1c-b976b9555005)
+
+
+![1](https://github.com/user-attachments/assets/60622a52-adc5-450f-b291-53f7a6ca8110)
+
+
+![4](https://github.com/user-attachments/assets/538dfd34-f811-4564-9657-e368e0d32159)
+
+
+
+
+ 
+</details>
