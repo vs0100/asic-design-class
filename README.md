@@ -2654,7 +2654,177 @@ report_wns -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_wns.txt
 
 
 
-
-
  
+</details>
+
+
+
+<details>
+
+<summary>Lab 12</summary>
+
+1.Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
+
+![Screenshot from 2024-11-13 18-23-22](https://github.com/user-attachments/assets/c8530be9-2b06-47d4-945b-6e4daeb6a536)
+
+
+
+![Screenshot from 2024-11-13 18-27-01](https://github.com/user-attachments/assets/10da3ae3-f5f6-49a2-a456-922632b9a95d)
+
+
+![Screenshot from 2024-11-13 18-39-04](https://github.com/user-attachments/assets/545eaaba-e7f2-4190-af72-71d16c6d9701)
+
+
+![Screenshot from 2024-11-13 18-39-53](https://github.com/user-attachments/assets/3b66b6e3-f268-429f-b857-c91330a1b119)
+
+
+## Section 2 - Good floorplan vs bad floorplan and introduction to library cells 
+
+ Section 2 Run - 17-03_12-06
+
+
+1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
+
+Commands to invoke the OpenLANE flow and perform floorplan
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+```
+```
+./flow.tcl -interactive
+prep -design picorv32a
+run_synthesis
+run_floorplan
+```
+Screenshot of floorplan run
+
+
+![Screenshot from 2024-11-13 18-47-45](https://github.com/user-attachments/assets/c30b1047-77c9-49c4-8ce7-3aed3ca666f6)
+
+
+![Screenshot from 2024-11-13 18-48-16](https://github.com/user-attachments/assets/58612571-4752-4de7-948b-882b71752189)
+
+
+2. Calculate the die area in microns from the values in floorplan def.
+
+Screenshot of contents of floorplan def
+
+![Screenshot from 2024-11-13 19-01-15](https://github.com/user-attachments/assets/ffe77420-e9b2-4fb1-b81a-7cc9b31a9d55)
+
+3.3. Load generated floorplan def in magic tool and explore the floorplan.
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/17-03_12-06/results/floorplan/
+
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+
+```
+Screenshots of floorplan def in magic
+
+![Screenshot from 2024-11-13 19-04-33](https://github.com/user-attachments/assets/ddb68b4c-1f8f-4351-ba1b-6d3985d18dde)
+
+
+Equidistant placement of ports
+
+![Screenshot from 2024-11-13 19-11-46](https://github.com/user-attachments/assets/4cffefdd-74ac-4262-9618-dc2ea3ed8f65)
+
+
+Port layer as set through config.tcl
+
+![Screenshot from 2024-11-13 19-17-32](https://github.com/user-attachments/assets/e8b86542-1fed-4447-af9a-f1e2a5dd47e9)
+
+![Screenshot from 2024-11-13 19-18-47](https://github.com/user-attachments/assets/2600cab2-61c8-40c5-8d58-495fd91465ca)
+
+
+Decap Cells and Tap Cells
+
+![Screenshot from 2024-11-13 19-22-27](https://github.com/user-attachments/assets/71ce52c5-d0a0-4523-a00c-f94c134982c8)
+
+
+Diogonally equidistant Tap cells
+
+![Screenshot from 2024-11-13 19-20-00](https://github.com/user-attachments/assets/c3c12d4e-b597-4eb9-90e0-a87709aaaa2c)
+
+
+Unplaced standard cells at the origin
+
+![Screenshot from 2024-11-13 19-47-34](https://github.com/user-attachments/assets/23f0be8c-44cb-4731-a74f-898c4298dd40)
+
+
+
+4.4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+
+```
+run_placement
+```
+
+Screenshots of placement run
+
+![Screenshot from 2024-11-13 19-28-06](https://github.com/user-attachments/assets/74d04381-acd2-48d8-9026-7d387fc00944)
+
+
+![Screenshot from 2024-11-13 19-30-15](https://github.com/user-attachments/assets/fca3974e-19af-459c-a0ad-f1ffaf717ee8)
+
+
+5.Load generated placement def in magic tool and explore the placement.
+
+Commands to load placement def in magic in another terminal
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/17-03_12-06/results/placement/
+
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+
+```
+Screenshots of floorplan def in magic
+
+![Screenshot from 2024-11-13 19-38-35](https://github.com/user-attachments/assets/aba2bbb1-ba27-4c51-adb1-c19cf00447e4)
+
+
+Standard cells legally placed
+
+![Screenshot from 2024-11-13 19-44-16](https://github.com/user-attachments/assets/6c7f4588-0bff-423e-b424-b010944984df)
+
+
+## Section 3 - Design library cell using Magic Layout and ngspice characterization
+
+Implementation
+
+Tasks:
+
+1. Clone custom inverter standard cell design from github repository: Standard cell design    and characterization using OpenLANE flow.
+2. Load the custom inverter layout in magic and explore.
+3. Spice extraction of inverter in magic.
+4. Editing the spice model file for analysis through simulation.
+5. Post-layout ngspice simulations.
+6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+
+Section 3 - Tasks 1 to 5 files, reports and logs can be found in the following folder
+
+
+Section 3 - Task 6 files, reports and logs can be found in the following folder
+
+
+1. Clone custom inverter standard cell design from github repository
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+cd vsdstdcelldesign
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech .
+ls
+magic -T sky130A.tech sky130_inv.mag &
+
+```
+Screenshot of commands run
+
+
+
+
+
+
+
+
+
 </details>
