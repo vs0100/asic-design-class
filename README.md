@@ -2684,8 +2684,6 @@ report_wns -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_wns.txt
 
 ## Section 2 - Good floorplan vs bad floorplan and introduction to library cells 
 
- Section 2 Run - 17-03_12-06
-
 
 1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 
@@ -2716,7 +2714,7 @@ Screenshot of contents of floorplan def
 
 ![Screenshot from 2024-11-13 19-01-15](https://github.com/user-attachments/assets/ffe77420-e9b2-4fb1-b81a-7cc9b31a9d55)
 
-3.3. Load generated floorplan def in magic tool and explore the floorplan.
+3. Load generated floorplan def in magic tool and explore the floorplan.
 
 ```
 cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/17-03_12-06/results/floorplan/
@@ -2757,7 +2755,7 @@ Unplaced standard cells at the origin
 
 
 
-4.4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
 
 ```
 run_placement
@@ -2797,7 +2795,7 @@ Implementation
 
 Tasks:
 
-1. Clone custom inverter standard cell design from github repository: Standard cell design    and characterization using OpenLANE flow.
+1. Clone custom inverter standard cell design from github repository: Standard cell design  and characterization using OpenLANE flow.
 2. Load the custom inverter layout in magic and explore.
 3. Spice extraction of inverter in magic.
 4. Editing the spice model file for analysis through simulation.
@@ -2805,7 +2803,7 @@ Tasks:
 6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
 
 
-1. Clone custom inverter standard cell design from github repository
+## 1. Clone custom inverter standard cell design from github repository
 
 ```
 cd Desktop/work/tools/openlane_working_dir/openlane
@@ -2820,7 +2818,7 @@ Screenshot of commands run
 
 ![Screenshot from 2024-11-13 20-23-27](https://github.com/user-attachments/assets/d523c2a1-9e88-4cbe-aab9-1685dfdb2424)
 
-2. Load the custom inverter layout in magic and explore.
+## 2. Load the custom inverter layout in magic and explore.
 
 Screenshot of custom inverter layout in magic
 ![Screenshot from 2024-11-13 20-24-02](https://github.com/user-attachments/assets/340f8bc8-1a89-4b3d-81a1-f245175449e6)
@@ -2843,7 +2841,7 @@ Deleting necessary layout part to see DRC error
 
 ![Screenshot from 2024-11-15 04-15-28](https://github.com/user-attachments/assets/cf6e8cab-56e5-4a0f-acfd-a58137322f15)
 
-3. Spice extraction of inverter in magic.
+## 3. Spice extraction of inverter in magic.
    
 ```
 # Check current directory
@@ -2859,14 +2857,14 @@ ext2spice cthresh 0 rthresh 0
 ext2spice
 ```
 
-Screenshot of tkcon window after running above commands
+ Screenshot of tkcon window after running above commands
 
 ![Screenshot from 2024-11-13 20-42-21](https://github.com/user-attachments/assets/cee224af-3fdd-43c2-8325-49af187546dc)
 
 Screenshot of created spice file
 ![Screenshot from 2024-11-13 20-43-27](https://github.com/user-attachments/assets/934ac1d2-b956-4962-9c3b-977b884f007c)
 
-4. Editing the spice model file for analysis through simulation.
+## 4. Editing the spice model file for analysis through simulation.
 
 Measuring unit distance in layout grid
 
@@ -2875,7 +2873,7 @@ Measuring unit distance in layout grid
 
 ![Screenshot from 2024-11-15 04-29-02](https://github.com/user-attachments/assets/2125cabe-da78-445d-913a-acdcef8bd98f)
 
-5. Post-layout ngspice simulations.
+## 5. Post-layout ngspice simulations.
 
 Commands for ngspice simulation
 
@@ -2930,7 +2928,7 @@ Screenshot of generated plot
 
 ![Screenshot from 2024-11-13 23-12-45](https://github.com/user-attachments/assets/96ffb7d5-d98a-4448-931f-c9b1c54ba39f)
 
-6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+## 6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
 
 Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
 
@@ -3061,23 +3059,35 @@ Screenshot of magic window with rule implemented
 
 ## Section 4 - Pre-layout timing analysis and importance of good clock tree
 
-Implementation
+Implementation  
 Section 4 tasks:-
 
+1.Fix up small DRC errors and verify the design is ready to be inserted into our flow.  
 
-1.Fix up small DRC errors and verify the design is ready to be     inserted into our flow.
-2.Save the finalized layout with custom name and open it.
-3.Generate lef from the layout.
-4.Copy the newly generated lef and associated required lib files   to 'picorv32a' design 'src' directory.
-5.Edit 'config.tcl' to change lib file and add the new extra lef   into the openlane flow.
-6.Run openlane flow synthesis with newly inserted custom           inverter cell.
-7.Remove/reduce the newly introduced violations with the           introduction of custom inverter cell by modifying design         parameters.
-8.Once synthesis has accepted our custom inverter we can now run   floorplan and placement and verify the cell is accepted in PnR   flow.
-9.Do Post-Synthesis timing analysis with OpenSTA tool.
-10.Make timing ECO fixes to remove all violations.
-11.Replace the old netlist with the new netlist generated after     timing ECO fix and implement the floorplan, placement and cts.
-12.Post-CTS OpenROAD timing analysis.
-13.Explore post-CTS OpenROAD timing analysis by removing           'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list           variable 'CTS_CLK_BUFFER_LIST'.
+2.Save the finalized layout with custom name and open it.  
+
+3.Generate lef from the layout.  
+
+4.Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory. 
+
+5.Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+
+6.Run openlane flow synthesis with newly inserted custom inverter cell.  
+
+7.Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+
+8.Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow. 
+
+9.Do Post-Synthesis timing analysis with OpenSTA tool.  
+
+10.Make timing ECO fixes to remove all violations. 
+
+11.Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
+
+12.Post-CTS OpenROAD timing analysis.  
+
+13.Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.  
+
 
 
 
@@ -3125,7 +3135,7 @@ Condition 3 verified
 ![Screenshot from 2024-11-15 05-25-34](https://github.com/user-attachments/assets/44528078-b043-43c1-bcee-1b4330bad08c)
 
 
-2. Save the finalized layout with custom name and open it.
+### 2. Save the finalized layout with custom name and open it.
 Command for tkcon window to save the layout with custom name
 ```
 # Command to save as
@@ -3140,7 +3150,7 @@ Screenshot of newly saved layout
 
 ![Screenshot from 2024-11-15 05-47-16](https://github.com/user-attachments/assets/5971d824-6800-42c6-878c-242b07279466)
 
-3. Generate lef from the layout.
+### 3. Generate lef from the layout.
 
 Command for tkcon window to write lef
 
@@ -3155,7 +3165,7 @@ Screenshot of command run
 Screenshot of newly created lef file
 ![Screenshot from 2024-11-14 03-39-42](https://github.com/user-attachments/assets/fe9d7795-77cb-43b4-a8a2-33dcbbb06369)
 
-4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+### 4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
 Commands to copy necessary files to 'picorv32a' design 'src' directory
 
 ```
@@ -3175,9 +3185,10 @@ Screenshot of commands run
 
 ![Screenshot from 2024-11-14 03-42-16](https://github.com/user-attachments/assets/3852eaaa-6a59-494c-a6c5-b4bfd0b3eb17)
 
-5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+### 5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
 
 Commands to be added to config.tcl to include our custom cell in the openlane flow
+```
 `set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
 set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
 set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
@@ -3190,7 +3201,8 @@ Edited config.tcl to include the added lef and change library to ones we added i
 
 ![Screenshot from 2024-11-15 13-33-12](https://github.com/user-attachments/assets/9efdc980-9a42-4d0c-80a6-849437833ff4)
 
-6. Run openlane flow synthesis with newly inserted custom inverter cell.
+### 6. Run openlane flow synthesis with newly inserted custom inverter cell.
+
 Commands to invoke the OpenLANE flow include new lef and perform synthesis
 
 ```
@@ -3227,7 +3239,7 @@ Screenshots of commands run
 
 ![Screenshot from 2024-11-14 04-09-14](https://github.com/user-attachments/assets/0c25b265-aaff-4270-b997-c030546fafac)
 
-7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+### 7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
 
 Noting down current design values generated before modifying parameters to improve timing
 
@@ -3279,7 +3291,7 @@ Comparing to previously noted run values area has increased and worst negative s
 
 ![Screenshot from 2024-11-14 04-09-14](https://github.com/user-attachments/assets/9f32e74c-0d44-4443-bc4a-4d26c40bf84c)
 
-8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+### 8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
 
 Now that our custom inverter is properly accepted in synthesis we can now run floorplan using following command
 
@@ -3294,8 +3306,9 @@ run_floorplan
 
 Since we are facing unexpected un-explainable error while using run_floorplan command, we can instead use the following set of commands available based on information from Desktop/work/tools/openlane_working_dir/openlane/scripts/tcl_commands/floorplan.tcl and also based on Floorplan Commands section in Desktop/work/tools/openlane_working_dir/openlane/docs/source/OpenLANE_commands.md
 
-```
 # Follwing commands are alltogather sourced in "run_floorplan" command
+```
+
 init_floorplan
 place_io
 tap_decap_or
@@ -3309,6 +3322,7 @@ Screenshots of commands run
 
 
 Now that floorplan is done we can do placement using following command
+
 ```
 # Now we are ready to run placement
 run_placement
@@ -3660,7 +3674,7 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 ## Section5 : Final steps for RTL2GDS using tritonRoute and openSTA
 
 
-Perform generation of Power Distribution Network (PDN) and explore the PDN layout
+### Perform generation of Power Distribution Network (PDN) and explore the PDN layout
 ```
 cd Desktop/work/tools/openlane_working_dir/openlane
 docker
@@ -3708,7 +3722,7 @@ gen_pdn
 ![Screenshot from 2024-11-14 12-46-53](https://github.com/user-attachments/assets/8691d252-d883-4251-b5df-85b72c0bcb7c)
 
 
-Commands to load PDN def in magic in another terminal
+### Commands to load PDN def in magic in another terminal
 
 ```
 # Change directory to path containing generated PDN def
@@ -3722,7 +3736,7 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ![Screenshot from 2024-11-14 18-55-52](https://github.com/user-attachments/assets/2828779e-241e-4478-b027-a1d90ad40b5f)
 
 ### Perform detailed routing using TritonRoute and explore the routed layout
-Perfrom detailed routing using TritonRoute and explore the routed layout
+
 ```
 # Check value of 'CURRENT_DEF'
 echo $::env(CURRENT_DEF)
@@ -3765,7 +3779,7 @@ Commands for SPEF extraction using external tool
 cd Desktop/work/tools/openlane_working_dir/openlane/scripts/spef_extractor/
 
 # Command extract spef
-```
+
 python3 main.py --lef_file /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_22-29/tmp/merged.lef --def_file /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_22-29/results/routing/picorv32a.def
 
 ```
