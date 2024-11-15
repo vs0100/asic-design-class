@@ -2800,11 +2800,6 @@ Tasks:
 5. Post-layout ngspice simulations.
 6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
 
-Section 3 - Tasks 1 to 5 files, reports and logs can be found in the following folder
-
-
-Section 3 - Task 6 files, reports and logs can be found in the following folder
-
 
 1. Clone custom inverter standard cell design from github repository
 
@@ -2819,11 +2814,188 @@ magic -T sky130A.tech sky130_inv.mag &
 ```
 Screenshot of commands run
 
+![Screenshot from 2024-11-13 20-23-27](https://github.com/user-attachments/assets/d523c2a1-9e88-4cbe-aab9-1685dfdb2424)
+
+2. Load the custom inverter layout in magic and explore.
+
+Screenshot of custom inverter layout in magic
+![Screenshot from 2024-11-13 20-24-02](https://github.com/user-attachments/assets/340f8bc8-1a89-4b3d-81a1-f245175449e6)
+
+NMOS and PMOS identified
+
+![Screenshot from 2024-11-13 20-27-02](https://github.com/user-attachments/assets/6adb0bd0-c7b1-4847-a27a-00d1e4ee3e01)
+
+![Screenshot from 2024-11-13 20-28-06](https://github.com/user-attachments/assets/14748782-5f62-40e3-8045-f990ce124de5)
+
+Output Y connectivity to PMOS and NMOS drain verified
+![Screenshot from 2024-11-15 04-15-04](https://github.com/user-attachments/assets/43938c58-d722-42ee-ab27-7298fbc43443)
+
+PMOS source connectivity to VDD (here VPWR) verified
+![Screenshot from 2024-11-15 04-15-08](https://github.com/user-attachments/assets/32c095ea-6098-4577-87a5-0b54c87102b1)
+
+![Screenshot from 2024-11-15 04-15-18](https://github.com/user-attachments/assets/08f8f5ba-80b2-4d9f-95ad-d83915ae88a8)
+
+Deleting necessary layout part to see DRC error
+
+![Screenshot from 2024-11-15 04-15-28](https://github.com/user-attachments/assets/cf6e8cab-56e5-4a0f-acfd-a58137322f15)
+
+3. Spice extraction of inverter in magic.
+   
+```
+# Check current directory
+pwd
+
+# Extraction command to extract to .ext format
+extract all
+
+# Before converting ext to spice this command enable the parasitic extraction also
+ext2spice cthresh 0 rthresh 0
+
+# Converting to ext to spice
+ext2spice
+```
+
+Screenshot of tkcon window after running above commands
+
+![Screenshot from 2024-11-13 20-42-21](https://github.com/user-attachments/assets/cee224af-3fdd-43c2-8325-49af187546dc)
+
+Screenshot of created spice file
+![Screenshot from 2024-11-13 20-43-27](https://github.com/user-attachments/assets/934ac1d2-b956-4962-9c3b-977b884f007c)
+
+4. Editing the spice model file for analysis through simulation.
+
+Measuring unit distance in layout grid
+
+![Screenshot from 2024-11-13 20-48-05](https://github.com/user-attachments/assets/4e9a4c56-1804-4cc0-a921-df11ff17f82f)
 
 
+![Screenshot from 2024-11-15 04-29-02](https://github.com/user-attachments/assets/2125cabe-da78-445d-913a-acdcef8bd98f)
+
+5. Post-layout ngspice simulations.
+
+Commands for ngspice simulation
+
+```
+# Command to directly load spice file for simulation to ngspice
+ngspice sky130_inv.spice
+
+# Now that we have entered ngspice with the simulation spice file loaded we just have to load the plot
+plot
+y vs time a
+```
+Screenshots of ngspice run
+
+![Screenshot from 2024-11-13 22-55-19](https://github.com/user-attachments/assets/0d3ac9cb-9816-4a8a-acfb-8fa012dd839d)
 
 
+Screenshot of generated plot
+![Screenshot from 2024-11-13 22-08-00](https://github.com/user-attachments/assets/e1eeb7d5-5888-4819-a8c8-6e99d162ac77)
 
+20% Screenshots
+![Screenshot from 2024-11-13 22-16-20](https://github.com/user-attachments/assets/d386b5c3-97e7-40d9-9fa5-ae429390ab8f)
+
+![Screenshot from 2024-11-13 22-55-19](https://github.com/user-attachments/assets/622acf5f-e2f3-4df1-9a09-88ca8ddd1aad)
+
+80% Screenshots
+![Screenshot from 2024-11-13 22-58-23](https://github.com/user-attachments/assets/a104fb96-63f7-45cf-ad07-081b3c951b0b)
+
+![Screenshot from 2024-11-13 22-59-52](https://github.com/user-attachments/assets/af52937f-4889-4885-adb4-0ce6772a7bba)
+
+20% Screenshots
+
+![Screenshot from 2024-11-13 23-05-12](https://github.com/user-attachments/assets/5e8cd977-fa66-4847-a4a8-10743608d25a)
+
+![Screenshot from 2024-11-13 23-05-07](https://github.com/user-attachments/assets/aa776cb4-c2b1-4f58-9279-160765044e49)
+
+80% Screenshots
+![Screenshot from 2024-11-13 23-08-13](https://github.com/user-attachments/assets/83351456-2b73-43c6-92ec-2b4457166c89)
+
+![Screenshot from 2024-11-13 23-08-08](https://github.com/user-attachments/assets/338cd935-677e-425a-901c-501e8ffccabb)
+
+50% Screenshots
+
+![Screenshot from 2024-11-13 23-09-10](https://github.com/user-attachments/assets/3c7beb1d-5ed7-48ca-8e39-67bcc70025cc)
+
+
+![Screenshot from 2024-11-13 23-09-05](https://github.com/user-attachments/assets/a1ba40dd-66df-4726-877b-22ff82231a45)
+
+
+50% Screenshots 
+
+![Screenshot from 2024-11-13 23-12-50](https://github.com/user-attachments/assets/5f3b5beb-0230-484f-8a44-173dc84628d9)
+
+![Screenshot from 2024-11-13 23-12-45](https://github.com/user-attachments/assets/96ffb7d5-d98a-4448-931f-c9b1c54ba39f)
+
+6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+
+Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
+
+```
+# Change to home directory
+cd
+
+# Command to download the lab files
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+# Since lab file is compressed command to extract it
+tar xfz drc_tests.tgz
+
+# Change directory into the lab folder
+cd drc_tests
+
+# List all files and directories present in the current directory
+ls -al
+
+# Command to view .magicrc file
+gvim .magicrc
+
+# Command to open magic tool in better graphics
+magic -d XR &
+
+```
+
+Screenshots of commands run
+
+![Screenshot from 2024-11-13 23-14-45](https://github.com/user-attachments/assets/6e48127d-fc16-48b0-8047-04fb38ee7fbd)
+
+Screenshot of .magicrc file
+![Screenshot from 2024-11-13 23-15-21](https://github.com/user-attachments/assets/d266931f-69f4-4cd0-9f20-12d21777d698)
+
+
+### Incorrectly implemented poly.9 simple rule correction
+
+Screenshot of poly rules
+
+![Screenshot from 2024-11-13 23-32-26](https://github.com/user-attachments/assets/cf12346d-359a-4b59-967f-351c318cb743)
+
+Incorrectly implemented poly.9 rule no drc violation even though spacing < 0.48ummands run
+![Screenshot from 2024-11-15 00-04-32](https://github.com/user-attachments/assets/ff1637f2-c253-455f-b18a-28e490a17ecc)
+
+![Screenshot from 2024-11-15 02-48-44](https://github.com/user-attachments/assets/416318ce-8037-430d-ba4d-ddb0ac6ff0ec)
+
+New commands inserted in sky130A.tech file to update drc
+
+![Screenshot from 2024-11-15 02-49-29](https://github.com/user-attachments/assets/3199d30b-af4a-4afa-8337-abcb2d6b91af)
+
+![Screenshot from 2024-11-15 02-49-35](https://github.com/user-attachments/assets/7d0fd445-78aa-4d9f-a4bc-8430af5e7606)
+
+Commands to run in tkcon window
+
+```
+# Loading updated tech file
+tech load sky130A.tech
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+Screenshot of magic window with rule implemented
+
+![Screenshot from 2024-11-15 02-49-46](https://github.com/user-attachments/assets/4d38fd23-8a4e-4579-a33f-ad0abf1f6cd4)
+
+![Screenshot from 2024-11-15 02-49-56](https://github.com/user-attachments/assets/75abde68-fb94-4112-8152-2abba0f0d975)
 
 
 
