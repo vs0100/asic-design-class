@@ -2663,6 +2663,10 @@ report_wns -digits {4} >> /home/vaishnavi/OpenSTA/lab11/output/sta_wns.txt
 
 <summary>Lab 12</summary>
 
+# Digital VLSI SoC Design and Planning
+
+## Section 1 - Inception of open-source EDA, OpenLANE and Sky130 PDK
+
 1.Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
 
 ![Screenshot from 2024-11-13 18-23-22](https://github.com/user-attachments/assets/c8530be9-2b06-47d4-945b-6e4daeb6a536)
