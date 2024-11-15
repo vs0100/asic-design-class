@@ -2997,6 +2997,103 @@ Screenshot of magic window with rule implemented
 
 ![Screenshot from 2024-11-15 02-49-56](https://github.com/user-attachments/assets/75abde68-fb94-4112-8152-2abba0f0d975)
 
+Screenshot of difftap rules
+
+Incorrectly implemented difftap.2 rule no drc violation even though spacing < 0.42u
+
+![Screenshot from 2024-11-15 02-50-18](https://github.com/user-attachments/assets/035ac3a5-c238-4ae9-ad4b-fd6ff4de12be)
+
+New commands inserted in sky130A.tech file to update drc
+
+![Screenshot from 2024-11-15 02-50-22](https://github.com/user-attachments/assets/09c7b2cc-eac8-4944-8309-e10317620b29)
+
+Commands to run in tkcon window
+
+```
+# Loading updated tech file
+tech load sky130A.tech
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+
+Screenshot of magic window with rule implemented
+![Screenshot from 2024-11-15 12-04-53](https://github.com/user-attachments/assets/00b2a4b2-01f2-4f3d-b3b8-b589800922ad)
+
+
+Incorrectly implemented nwell.4 complex rule correction
+
+
+
+Screenshot of nwell rules
+![Screenshot from 2024-11-15 05-06-03](https://github.com/user-attachments/assets/aae0e170-4921-4fac-8537-3f301b7a15d5)
+
+![Screenshot from 2024-11-15 05-06-23](https://github.com/user-attachments/assets/68a5658f-aced-4640-a8f1-b5894c6ffc59)
+
+![Screenshot from 2024-11-15 05-06-28](https://github.com/user-attachments/assets/c7af5f40-c5ad-42da-a5f7-4849b261a8a3)
+
+Commands to run in tkcon window
+
+```
+# Loading updated tech file
+tech load sky130A.tech
+
+# Change drc style to drc full
+drc style drc(full)
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+
+Screenshot of magic window with rule implemented
+
+![Screenshot from 2024-11-15 05-06-08](https://github.com/user-attachments/assets/c1423377-641d-45e9-8dc5-4d161fd96f50)
+
+## Section 4 - Pre-layout timing analysis and importance of good clock tree
+
+Implementation
+Section 4 tasks:-
+
+
+1.Fix up small DRC errors and verify the design is ready to be     inserted into our flow.
+2.Save the finalized layout with custom name and open it.
+3.Generate lef from the layout.
+4.Copy the newly generated lef and associated required lib files   to 'picorv32a' design 'src' directory.
+5.Edit 'config.tcl' to change lib file and add the new extra lef   into the openlane flow.
+6.Run openlane flow synthesis with newly inserted custom           inverter cell.
+7.Remove/reduce the newly introduced violations with the           introduction of custom inverter cell by modifying design         parameters.
+8.Once synthesis has accepted our custom inverter we can now run   floorplan and placement and verify the cell is accepted in PnR   flow.
+9.Do Post-Synthesis timing analysis with OpenSTA tool.
+10.Make timing ECO fixes to remove all violations.
+11.Replace the old netlist with the new netlist generated after     timing ECO fix and implement the floorplan, placement and cts.
+12.Post-CTS OpenROAD timing analysis.
+13.Explore post-CTS OpenROAD timing analysis by removing           'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list           variable 'CTS_CLK_BUFFER_LIST'.
+
+
+
+### 1. Fix up small DRC errors and verify the design is ready to be inserted into our flow.
+Conditions to be verified before moving forward with custom designed cell layout:
+
+Condition 1: The input and output ports of the standard cell should lie on the intersection of the vertical and horizontal tracks.
+Condition 2: Width of the standard cell should be odd multiples of the horizontal track pitch.
+Condition 3: Height of the standard cell should be even multiples of the vertical track pitch.
+
+Commands to open the custom inverter layout
+```
+# Change directory to vsdstdcelldesign
+cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+
+# Command to open custom inverter layout in magic
+magic -T sky130A.tech sky130_inv.mag &
+```
+
+
 
 
 </details>
