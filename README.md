@@ -3835,3 +3835,64 @@ exit
 ![Screenshot from 2024-11-15 15-52-18](https://github.com/user-attachments/assets/17b2aa75-5716-4c84-b4bb-c13e0a0a81f3)
 
 </details>
+
+<details>
+
+### OpenROAD PHYSICAL DESIGN
+
+## OpenROAD: Integrated Chip Physical Design Tool
+
+### Installing and setting up Open Road Flow Scripts
+
+'''
+git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts
+cd OpenROAD-flow-scripts
+sudo ./setup.sh
+
+'''
+![Screenshot from 2024-11-26 02-17-50](https://github.com/user-attachments/assets/66937134-297f-4c86-a097-0a853cde63b3)
+
+
+### Build
+
+'''
+./build_openroad.sh --local
+
+'''
+
+ ### Verify Installation
+'''
+source ./env.sh
+yosys -help
+openroad -help
+cd flow
+make
+
+
+### Flow structure
+
+### ORFS Directory Structure and File formats
+
+'''
+ORF/OpenROAD-flow-scripts
+source env.sh
+cd flow
+'''
+
+Commands for synthesis:
+
+'''
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
+'''
+
+![Screenshot from 2024-11-26 02-17-50](https://github.com/user-attachments/assets/8493dba5-f590-4fd6-af98-53d6c2579847)
+
+![Screenshot from 2024-11-26 02-18-11](https://github.com/user-attachments/assets/ceb83c29-c51c-4500-a8cb-4a5734bb6fb1)
+
+
+Synthesis reports:
+
+
+
+ 
+</details>
