@@ -3892,6 +3892,81 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
 
 Synthesis reports:
 
+Netlist:
+![Screenshot from 2024-11-26 15-13-25](https://github.com/user-attachments/assets/50c31d1d-aac1-48d9-a742-95325dabb7a2)
+
+
+Log:
+![Screenshot from 2024-11-26 15-13-25](https://github.com/user-attachments/assets/9177d230-38b6-42b0-a0b6-a305cc91696b)
+
+ 
+Check:
+![Screenshot from 2024-11-26 15-14-21](https://github.com/user-attachments/assets/fc4d9576-5cd3-42fc-8caf-a44a899e2508)
+
+
+Stats:
+![Screenshot from 2024-11-26 15-14-39](https://github.com/user-attachments/assets/1c47c0b4-03d3-446d-9373-0cb9164b4d26)
+
+![Screenshot from 2024-11-26 15-14-53](https://github.com/user-attachments/assets/427e5614-8fa8-45a3-9332-511a8dc87aa6)
+
+
+Commands for floorplan:
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
+```
+
+
+![Screenshot from 2024-11-26 02-18-11](https://github.com/user-attachments/assets/60219779-6c46-4f4d-a6a8-5f41a888162c)
+
+
+![Screenshot from 2024-11-26 02-18-27](https://github.com/user-attachments/assets/629b915a-a744-4dba-a490-d858ac7d65ec)
+
+```
+make gui_floorplan
+```
+
+![Screenshot from 2024-11-26 02-18-34](https://github.com/user-attachments/assets/09373189-d870-4076-8a3a-8e8420ab462d)
+
+
+![Screenshot from 2024-11-26 02-19-11](https://github.com/user-attachments/assets/e573f2c7-551a-44d6-a3bc-94f9c308c12a)
+
+
+![Screenshot from 2024-11-26 02-20-45](https://github.com/user-attachments/assets/6722fea2-02e3-4b61-855f-5403b851982b)
+
+
+![Screenshot from 2024-11-26 02-20-08](https://github.com/user-attachments/assets/bd6bed89-42d8-430b-a75f-f90f063f9deb)
+
+Floorplan log:
+
+![Screenshot from 2024-11-26 15-21-59](https://github.com/user-attachments/assets/0c87581d-d831-4341-b75f-8823c97796bf)
+
+Floorplan Timming Report:
+
+![Screenshot from 2024-11-26 15-23-16](https://github.com/user-attachments/assets/add11e82-dead-4e0c-ba52-a5b23293c593)
+
+Commands for placement:
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk place
+```
+
+![Screenshot from 2024-11-26 02-18-41](https://github.com/user-attachments/assets/a533786e-8c44-4f45-85ee-d8ec3893a934)
+
+
+![Screenshot from 2024-11-26 02-18-52](https://github.com/user-attachments/assets/9fb51a56-293c-4c34-8edb-569db31e3736)
+
+```
+make gui_place
+```
+
+![Screenshot from 2024-11-26 02-22-35](https://github.com/user-attachments/assets/e2eaca88-14c7-4846-9d69-88e1776c7b4f)
+
+Heatmap:
+
+![Screenshot from 2024-11-26 13-43-13](https://github.com/user-attachments/assets/440aa886-cabe-47b6-a7ed-9acaf7a17a36)
+
+
 
 
  
