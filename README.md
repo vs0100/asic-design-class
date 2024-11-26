@@ -3835,8 +3835,9 @@ exit
 ![Screenshot from 2024-11-15 15-52-18](https://github.com/user-attachments/assets/17b2aa75-5716-4c84-b4bb-c13e0a0a81f3)
 
 </details>
-<summary>Lab 13</summary>
 <details>
+<summary>Lab 13</summary>
+
 
 ### OpenROAD PHYSICAL DESIGN
 
@@ -3855,19 +3856,19 @@ sudo ./setup.sh
 
 ### Build
 
-'''
+```
 ./build_openroad.sh --local
 
-'''
+```
 
  ### Verify Installation
-'''
+```
 source ./env.sh
 yosys -help
 openroad -help
 cd flow
 make
-
+```
 
 ### Flow structure
 
