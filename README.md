@@ -3835,7 +3835,7 @@ exit
 ![Screenshot from 2024-11-15 15-52-18](https://github.com/user-attachments/assets/17b2aa75-5716-4c84-b4bb-c13e0a0a81f3)
 
 </details>
-
+<summary>Lab 13</summary>
 <details>
 
 ### OpenROAD PHYSICAL DESIGN
@@ -3844,12 +3844,12 @@ exit
 
 ### Installing and setting up Open Road Flow Scripts
 
-'''
+```
 git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts
 cd OpenROAD-flow-scripts
 sudo ./setup.sh
 
-'''
+```
 ![Screenshot from 2024-11-26 02-17-50](https://github.com/user-attachments/assets/66937134-297f-4c86-a097-0a853cde63b3)
 
 
@@ -3873,17 +3873,17 @@ make
 
 ### ORFS Directory Structure and File formats
 
-'''
+```
 ORF/OpenROAD-flow-scripts
 source env.sh
 cd flow
-'''
+```
 
 Commands for synthesis:
 
-'''
+```
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
-'''
+```
 
 ![Screenshot from 2024-11-26 02-17-50](https://github.com/user-attachments/assets/8493dba5-f590-4fd6-af98-53d6c2579847)
 
@@ -3966,7 +3966,34 @@ Heatmap:
 
 ![Screenshot from 2024-11-26 13-43-13](https://github.com/user-attachments/assets/440aa886-cabe-47b6-a7ed-9acaf7a17a36)
 
+Placement Report:
+![Screenshot from 2024-11-26 16-06-45](https://github.com/user-attachments/assets/73eb5973-a112-41f1-aa7e-9f29b2e53430)
 
+
+Command for CTS:
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk cts
+```
+![Screenshot from 2024-11-26 02-21-36](https://github.com/user-attachments/assets/91656647-520a-4540-9338-3d130217d2a9)
+
+
+![Screenshot from 2024-11-26 02-21-41](https://github.com/user-attachments/assets/04fa7da0-f60f-4852-bcff-03313a79a095)
+
+
+```
+make gui_cts
+```
+
+![Screenshot from 2024-11-26 02-22-35](https://github.com/user-attachments/assets/c669ba61-ea60-4a5f-a4f4-cf66a8bbe11b)
+
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
+```
+![Screenshot from 2024-11-26 02-27-18](https://github.com/user-attachments/assets/1fcc0dab-ff03-45e0-912d-a96410b9d23d)
+
+![Screenshot from 2024-11-26 02-27-40](https://github.com/user-attachments/assets/3b5c822c-8fff-420c-9f6b-cd3479bbffc4)
 
 
  
